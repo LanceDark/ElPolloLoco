@@ -28,7 +28,7 @@ class ThrowableObject extends MoveableObject {
       this.animateBottle();
     } else {
       clearInterval(this.throwBottleInterval);
-      this.playGroundAnimation(this.groundBottle[0]);
+      this.playGroundAnimation();
       this.speedY = 0;
     }
     this.applyGravityForBottle();
@@ -62,17 +62,15 @@ class ThrowableObject extends MoveableObject {
     if (this.y >= 390) {
       console.log("Bottle is at y=390!");
       clearInterval(this.throwBottleInterval);
-      this.playGroundAnimation(this.groundBottle[0]);
+      this.playGroundAnimation();
     }
   }
 
-  playGroundAnimation(newImageUrl) {
-    this.updateImage(newImageUrl);
-    setTimeout(() => {
-    }, 5000);
+  playGroundAnimation() {
+    this.updateImageBottle(this.groundBottle[0]);
   }
 
-  updateImage(newImageUrl) {
+  updateImageBottle(newImageUrl) {
     if (this.imageCache[newImageUrl]) {
       this.img = this.imageCache[newImageUrl];
     } else {
