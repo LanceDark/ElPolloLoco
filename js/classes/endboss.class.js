@@ -15,10 +15,12 @@ class Endboss extends MoveableObject {
     "img/4_enemie_boss_chicken/1_walk/G3.png",
     "img/4_enemie_boss_chicken/1_walk/G4.png"
   ];
+  currentImage = 0;
   height = 500;
   width = 300;
   y = -38;
   speed = 0.2;
+  hp = 50;
 
   constructor() {
     super().loadImage('./img/4_enemie_boss_chicken/2_alert/G5.png');

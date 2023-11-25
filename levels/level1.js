@@ -6,7 +6,6 @@ const level1 = new Level(
     new LowEnemy(),
     new LowEnemy(),
     new LowEnemy(),
-    new Endboss(),
   ],
   [new Cloud(), new Cloud()],
   [
@@ -29,7 +28,7 @@ const level1 = new Level(
     new Background("img/5_background/layers/air.png", 719 * 3, 0),
     new Background("img/5_background/layers/3_third_layer/2.png", 719 * 3, 80),
     new Background("img/5_background/layers/2_second_layer/2.png", 719 * 3, 80),
-    new Background("img/5_background/layers/1_first_layer/2.png", 719 * 3, 80),
+    new Background("img/5_background/layers/1_first_layer/2.png", 719 * 3, 80)
   ],
   [
     new Coin(225, 175),
@@ -37,13 +36,16 @@ const level1 = new Level(
     new Coin(375, 175),
     new Coin(225 + 700, 175),
     new Coin(300 + 700, 250),
-    new Coin(375 + 700, 175),
+    new Coin(375 + 700, 175)
   ],
   [
     new Bottle(600, 250),
     new Bottle(1300, 250),
     new Bottle(1500, 250),
     new Bottle(2000, 100),
-    new Bottle(300, 300),
-  ]
+    new Bottle(300, 300)
+  ],
+  [
+    new Endboss()
+  ],
 );

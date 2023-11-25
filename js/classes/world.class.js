@@ -6,6 +6,7 @@ class World {
   throwableObject = [];
   bottleCount = 0;
   lowEnemy = level1.lowEnemy;
+  endboss = level1.endboss;
   cloud = level1.cloud;
   background = level1.background;
   coin = level1.coin;
@@ -51,7 +52,9 @@ class World {
   checkJumpOnEnemy() {
     this.level.lowEnemy.forEach((enemy) => {
       if (this.character.isJumpingOnChicken(this.character, enemy)) {
-        enemy.updateImage("img/3_enemies_chicken/chicken_normal/2_dead/dead.png");
+        enemy.updateImage(
+          "img/3_enemies_chicken/chicken_normal/2_dead/dead.png"
+        );
         enemy.removeChicken();
       }
       if (enemy.isDead) {
@@ -67,7 +70,7 @@ class World {
         this.statusbar.setPercentage(this.character.energy);
         this.character.coin -= 10;
         this.coinbar.coinReduce(this.character.coin);
-        console.log(this.character.energy)
+        console.log(this.character.energy);
       }
     });
   }
@@ -99,11 +102,10 @@ class World {
     });
   }
 
-  checkHealth(){
+  checkHealth() {
     if (this.character.energy <= 0) {
       gameOverScreen();
-    } else
-    return;
+    } else return;
   }
 
   removeObject(objectToRemove) {
@@ -113,9 +115,7 @@ class World {
     }
   }
 
-  coinReduce(){
-
-  }
+  coinReduce() {}
 
   setWorld() {
     this.character.world = this;
@@ -132,6 +132,7 @@ class World {
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.cloud);
     this.addObjectsToMap(this.level.lowEnemy);
+    this.addObjectsToMap(this.level.endboss);
     this.addObjectsToMap(this.throwableObject);
 
     this.ctx.translate(-this.camera_x, 0);
@@ -160,10 +161,8 @@ class World {
     if (moveableObject.otherDirection) {
       this.flipImage(moveableObject);
     }
-
     moveableObject.draw(this.ctx);
     moveableObject.drawFrame(this.ctx);
-
     if (moveableObject.otherDirection) {
       this.flipImageBack(moveableObject);
     }
