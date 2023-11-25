@@ -24,7 +24,7 @@ class ThrowableObject extends MoveableObject {
   throw() {
     this.loadImage("img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png");
     this.speedY = 30;
-    if (this.y > 200 && this.y < 390) {
+    if (this.y > 200 && this.y < 350) {
       this.animateBottle();
     } else {
       clearInterval(this.throwBottleInterval);
@@ -38,29 +38,28 @@ class ThrowableObject extends MoveableObject {
   }
 
   animateBottle() {
-    if (this.y < 390) {
+    if (this.y < 350) {
       this.throwBottleInterval = setInterval(() => {
         this.playAnimation(this.IMAGES_THROW_BOTTLE);
         this.applyGravityForBottle();
+        this.checkBottlePosition()
       }, 30);
-      setInterval(() => {
-        this.checkBottlePosition();
-      }, 0.5);
     } else {
+      clearInterval(this.throwBottleInterval);
       return;
     }
   }
 
   applyGravityForBottle() {
-    if (!(this.y >= 390)) {
+    if (!(this.y >= 350)) {
       this.y -= this.speedY;
       this.speedY -= this.acceleration;
     }
   }
 
   checkBottlePosition() {
-    if (this.y >= 390) {
-      console.log("Bottle is at y=390!");
+    if (this.y >= 350) {
+      console.log("Bottle is at y=350!");
       clearInterval(this.throwBottleInterval);
       this.playGroundAnimation();
     }
