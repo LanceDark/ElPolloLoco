@@ -43,6 +43,7 @@ class ThrowableObject extends MoveableObject {
         this.playAnimation(this.IMAGES_THROW_BOTTLE);
         this.applyGravityForBottle();
         this.checkBottlePosition()
+        this.checkPositionOfBottleAlways();
       }, 30);
     } else {
       clearInterval(this.throwBottleInterval);
@@ -59,10 +60,12 @@ class ThrowableObject extends MoveableObject {
 
   checkBottlePosition() {
     if (this.y >= 350) {
-      console.log("Bottle is at y=350!");
       clearInterval(this.throwBottleInterval);
       this.playGroundAnimation();
     }
+  }
+
+  checkPositionOfBottleAlways(){
   }
 
   playGroundAnimation() {

@@ -18,4 +18,13 @@ class Bottle extends MoveableObject {
     }
     return false;
   }
+
+  isCollidingBoss(boss) {
+    return (
+      this.x < boss.x + boss.width &&
+      this.x + this.width > boss.x &&
+      this.y < boss.y + boss.height &&
+      this.y + this.height > boss.y
+    );
+  }
 }

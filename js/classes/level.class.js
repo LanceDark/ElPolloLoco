@@ -4,7 +4,7 @@ class Level {
     background;
     coin;
     bottle;
-    endboss
+    endboss;
 
     level_end_x = 2200;
 
@@ -14,6 +14,6 @@ class Level {
         this.background = background;
         this.coin = coin;
         this.bottle = bottle;
-        this.endboss = endboss
+        this.endboss = endboss;
     }
 }

@@ -39,4 +39,11 @@ class Endboss extends MoveableObject {
       this.moveLeft()
     },1000 / 60)
   }
+
+  checkBossPosition() {
+    setInterval(()=> {
+      console.log("Endboss Position:", this.x, this.y);
+    }, 20)  
+  }
+
 }

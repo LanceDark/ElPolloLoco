@@ -34,7 +34,18 @@ class World {
       this.checkThrowObjects();
       this.checkBottleCollect();
       this.checkJumpOnEnemy();
+      this.checkBossCollision();
     }, 250);
+  }
+
+
+  checkBossCollision() {
+    this.throwableObject.forEach((bottle) => {
+      if (!bottle.isCollected && this.endboss[0].isColliding(bottle)) {
+        console.log("Die Flasche trifft den Endboss!");
+        bottle.isCollected = true;
+      }
+    });
   }
 
   checkThrowObjects() {
