@@ -1,12 +1,18 @@
-class Bottle extends MoveableObject {
+class Bottle extends ThrowableObject {
   IMAGES_BOTTLE = ["img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png"];
+  IMAGES_SPLASH = [
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png",
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png",
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png",
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png",
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png",
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png"
+  ];
   isCollected = false;
 
   constructor(x, y) {
-    super().loadImage(
-      "img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png"
-    );
-    this.loadImages(this.IMAGES_BOTTLE);
+    super().loadImage(this.IMAGES_BOTTLE);
+    this.loadImages(this.IMAGES_SPLASH);
     this.x = x;
     this.y = y;
   }
@@ -26,5 +32,10 @@ class Bottle extends MoveableObject {
       this.y < boss.y + boss.height &&
       this.y + this.height > boss.y
     );
+  }
+
+  splashAnimation(){
+    console.log('Splash Animation wird abgespielt');
+    super.playAnimation(this.IMAGES_SPLASH);
   }
 }

@@ -18,38 +18,52 @@ class ThrowableObject extends MoveableObject {
     this.throwBottleInterval = null;
     this.speedY = 0;
     this.acceleration = 2.7;
-    this.throw();
   }
 
   throw() {
+    clearInterval(this.throwBottleInterval);
     this.loadImage("img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png");
     this.speedY = 30;
     if (this.y > 200 && this.y < 350) {
       this.animateBottle();
     } else {
-      clearInterval(this.throwBottleInterval);
       this.playGroundAnimation();
       this.speedY = 0;
     }
     this.applyGravityForBottle();
     this.throwBottleInterval = setInterval(() => {
       this.x += 10;
+
+      if (this.y >= 350) {
+        clearInterval(this.throwBottleInterval);
+        this.playGroundAnimation();
+      }
     }, 25);
   }
+  
 
   animateBottle() {
     if (this.y < 350) {
       this.throwBottleInterval = setInterval(() => {
+        console.log("Animating Bottle...");
         this.playAnimation(this.IMAGES_THROW_BOTTLE);
         this.applyGravityForBottle();
-        this.checkBottlePosition()
-        this.checkPositionOfBottleAlways();
+        this.checkBottlePosition();
+  
+        // Überprüfen Sie die Flaschenposition und stoppen Sie das Intervall, wenn die Flasche den Boden erreicht
+        if (this.y >= 350) {
+          clearInterval(this.throwBottleInterval);
+          this.playGroundAnimation();
+        }
       }, 30);
     } else {
       clearInterval(this.throwBottleInterval);
+      this.playGroundAnimation();
       return;
     }
   }
+  
+  
 
   applyGravityForBottle() {
     if (!(this.y >= 350)) {
@@ -63,9 +77,6 @@ class ThrowableObject extends MoveableObject {
       clearInterval(this.throwBottleInterval);
       this.playGroundAnimation();
     }
-  }
-
-  checkPositionOfBottleAlways(){
   }
 
   playGroundAnimation() {

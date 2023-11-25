@@ -40,23 +40,31 @@ class World {
 
 
   checkBossCollision() {
+    if(this.endboss && this.endboss.length > 0) {
     this.throwableObject.forEach((bottle) => {
       if (!bottle.isCollected && this.endboss[0].isColliding(bottle)) {
         console.log("Die Flasche trifft den Endboss!");
         bottle.isCollected = true;
+        bottle.splashAnimation();
       }
     });
+    }
   }
 
   checkThrowObjects() {
-    if (this.keyboard.D && this.character.bottle > 0) {
-      let bottle = new ThrowableObject(
+    if (this.keyboard.D && this.character.bottle > 0 && !this.character.isAboveGround()) {
+      if (!this.throwableObject) {
+        console.error('throwableObject ist nicht definiert!');
+        return;
+      }
+      let bottle = new Bottle(
         this.character.x + 100,
         this.character.y + 100
       );
       this.throwableObject.push(bottle);
       this.character.bottle -= 10;
       this.bottlebar.earnBottle(this.character.bottle);
+      bottle.throw();
     }
   }
 
