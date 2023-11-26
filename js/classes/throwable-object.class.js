@@ -33,7 +33,6 @@ class ThrowableObject extends MoveableObject {
     this.applyGravityForBottle();
     this.throwBottleInterval = setInterval(() => {
       this.x += 10;
-
       if (this.y >= 350) {
         clearInterval(this.throwBottleInterval);
         this.playGroundAnimation();
@@ -41,6 +40,9 @@ class ThrowableObject extends MoveableObject {
     }, 25);
   }
   
+  stopAnimation() {
+    clearInterval(this.throwBottleInterval);
+  }
 
   animateBottle() {
     if (this.y < 350) {
@@ -49,8 +51,6 @@ class ThrowableObject extends MoveableObject {
         this.playAnimation(this.IMAGES_THROW_BOTTLE);
         this.applyGravityForBottle();
         this.checkBottlePosition();
-  
-        // Überprüfen Sie die Flaschenposition und stoppen Sie das Intervall, wenn die Flasche den Boden erreicht
         if (this.y >= 350) {
           clearInterval(this.throwBottleInterval);
           this.playGroundAnimation();
@@ -62,8 +62,6 @@ class ThrowableObject extends MoveableObject {
       return;
     }
   }
-  
-  
 
   applyGravityForBottle() {
     if (!(this.y >= 350)) {
