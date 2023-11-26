@@ -12,7 +12,8 @@ class Bottle extends ThrowableObject {
   throwBottleInterval;
 
   constructor(x, y) {
-    super().loadImage(this.IMAGES_BOTTLE);
+    super();
+    this.loadImage(this.IMAGES_BOTTLE);
     this.loadImages(this.IMAGES_SPLASH);
     this.x = x;
     this.y = y;
@@ -39,8 +40,6 @@ class Bottle extends ThrowableObject {
   splashAnimation() {
     console.log("Splash Animation wird abgespielt");
     this.stopAnimation();
-    setInterval(() => {
-      this.playAnimation(this.IMAGES_SPLASH);
-    }, 100);
+    this.playAnimation(this.IMAGES_SPLASH);
   }
 }

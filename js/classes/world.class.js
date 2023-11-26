@@ -46,6 +46,7 @@
           console.log("Die Flasche trifft den Endboss!");
           bottle.isCollected = true;
           bottle.splashAnimation();
+          this.removeObject(bottle)
         }
       });
       }
@@ -133,8 +134,6 @@
         this.throwableObject.splice(i, 1);
       }
     }
-
-    coinReduce() {}
 
     setWorld() {
       this.character.world = this;
