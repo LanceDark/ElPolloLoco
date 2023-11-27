@@ -10,6 +10,8 @@ class Bottle extends ThrowableObject {
   ];
   isCollected = false;
   throwBottleInterval;
+  width = 70;
+  height = 80;
 
   constructor(x, y) {
     super();
@@ -20,6 +22,15 @@ class Bottle extends ThrowableObject {
     this.throwBottleInterval = null;
   }
 
+  adjustHitbox() {
+    this.hitbox = {
+      x: this.x,
+      y: this.y,
+      width: this.width,
+      height: this.height,
+    };
+  }
+
   isCollectedBy(character) {
     if (!this.isCollected && character.isColliding(this)) {
       this.isCollected = true;
@@ -28,18 +39,11 @@ class Bottle extends ThrowableObject {
     return false;
   }
 
-  isCollidingBoss(boss) {
-    return (
-      this.x < boss.x + boss.width &&
-      this.x + this.width > boss.x &&
-      this.y < boss.y + boss.height &&
-      this.y + this.height > boss.y
-    );
-  }
-
   splashAnimation() {
     console.log("Splash Animation wird abgespielt");
-    this.stopAnimation();
     this.playAnimation(this.IMAGES_SPLASH);
+    setTimeout(() =>{
+      this.isPlayingAnimation = false;
+    }, this.IMAGES_SPLASH.length * 400);
   }
 }

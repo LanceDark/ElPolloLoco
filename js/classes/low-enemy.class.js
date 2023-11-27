@@ -2,12 +2,12 @@ class LowEnemy extends MoveableObject {
   y = 340;
   height = 90;
   IMAGES_WALKING = [
-    "img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
-    "img/3_enemies_chicken/chicken_normal/1_walk/2_w.png",
-    "img/3_enemies_chicken/chicken_normal/1_walk/3_w.png",
+    "./img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
+    "./img/3_enemies_chicken/chicken_normal/1_walk/2_w.png",
+    "./img/3_enemies_chicken/chicken_normal/1_walk/3_w.png",
   ];
   IMAGES_CHICKEN_DEAD = [
-    "img/3_enemies_chicken/chicken_normal/2_dead/dead.png",
+    "./img/3_enemies_chicken/chicken_normal/2_dead/dead.png",
   ];
   currentImage = 0;
   speed = 0.2;
@@ -22,6 +22,15 @@ class LowEnemy extends MoveableObject {
     this.speed = 0.15 + Math.random() * 0.25;
     this.animateChicken();
     this.imageUrl = imageUrl;
+  }
+
+  adjustHitbox() {
+    this.hitbox = {
+      x: this.x,
+      y: this.y,
+      width: this.width,
+      height: this.height,
+    };
   }
 
   updateImage(newImageUrl) {

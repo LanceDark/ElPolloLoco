@@ -9,7 +9,7 @@ function startScreen() {
   let canvas = document.getElementById("playground");
   let ctx = canvas.getContext("2d");
   let img = new Image();
-  img.src = "img/9_intro_outro_screens/start/startscreen_1.png";
+  img.src = "./img/9_intro_outro_screens/start/startscreen_1.png";
 
   img.onload = function () {
     let maxWidth = 720;
@@ -112,7 +112,7 @@ function gameOverScreen() {
   let canvas = document.getElementById("playground");
   let ctx = canvas.getContext("2d");
   let img = new Image();
-  img.src = "img/9_intro_outro_screens/game_over/oh no you lost!.png";
+  img.src = "./img/9_intro_outro_screens/game_over/oh no you lost!.png";
 
   img.onload = function () {
     let maxWidth = 720;

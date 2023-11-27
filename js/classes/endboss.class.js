@@ -1,20 +1,25 @@
 class Endboss extends MoveableObject {
   IMAGES_SPAWN = [
-    "img/4_enemie_boss_chicken/2_alert/G5.png",
-    "img/4_enemie_boss_chicken/2_alert/G6.png",
-    "img/4_enemie_boss_chicken/2_alert/G7.png",
-    "img/4_enemie_boss_chicken/2_alert/G8.png",
-    "img/4_enemie_boss_chicken/2_alert/G9.png",
-    "img/4_enemie_boss_chicken/2_alert/G10.png",
-    "img/4_enemie_boss_chicken/2_alert/G11.png",
-    'img/4_enemie_boss_chicken/2_alert/G12.png'
+    "./img/4_enemie_boss_chicken/2_alert/G5.png",
+    "./img/4_enemie_boss_chicken/2_alert/G6.png",
+    "./img/4_enemie_boss_chicken/2_alert/G7.png",
+    "./img/4_enemie_boss_chicken/2_alert/G8.png",
+    "./img/4_enemie_boss_chicken/2_alert/G9.png",
+    "./img/4_enemie_boss_chicken/2_alert/G10.png",
+    "./img/4_enemie_boss_chicken/2_alert/G11.png",
+    './img/4_enemie_boss_chicken/2_alert/G12.png'
   ];
   IMAGES_WALKING = [
-    "img/4_enemie_boss_chicken/1_walk/G1.png",
-    "img/4_enemie_boss_chicken/1_walk/G2.png",
-    "img/4_enemie_boss_chicken/1_walk/G3.png",
-    "img/4_enemie_boss_chicken/1_walk/G4.png"
+    "./img/4_enemie_boss_chicken/1_walk/G1.png",
+    "./img/4_enemie_boss_chicken/1_walk/G2.png",
+    "./img/4_enemie_boss_chicken/1_walk/G3.png",
+    "./img/4_enemie_boss_chicken/1_walk/G4.png"
   ];
+  IMAGES_ANGRY = [
+    "./img/4_enemie_boss_chicken/4_hurt/G21.png",
+    "./img/4_enemie_boss_chicken/4_hurt/G22.png",
+    "./img/4_enemie_boss_chicken/4_hurt/G23.png"
+  ]
   currentImage = 0;
   height = 500;
   width = 300;
@@ -26,9 +31,19 @@ class Endboss extends MoveableObject {
     super().loadImage('./img/4_enemie_boss_chicken/2_alert/G5.png');
     this.loadImages(this.IMAGES_SPAWN);
     this.loadImages(this.IMAGES_WALKING);
+    this.loadImages(this.IMAGES_ANGRY);
     this.x = 2500;
     this.speed = 0.15 + Math.random() * 0.25;
     this.animateEndboss();
+  }
+
+  adjustHitbox() {
+    this.hitbox = {
+      x: this.x,
+      y: this.y,
+      width: this.width,
+      height: this.height,
+    };
   }
 
   animateEndboss(){
@@ -44,6 +59,24 @@ class Endboss extends MoveableObject {
     setInterval(()=> {
       console.log("Endboss Position:", this.x, this.y);
     }, 20)  
+  }
+
+  isCollidingBoss(boss) {
+    let collision = 
+      this.x < boss.x + boss.width &&
+      this.x + this.width > boss.x &&
+      this.y < boss.y + boss.height &&
+      this.y + this.height > boss.y;
+
+      this.bottleIsCollidingBoss = 0;
+
+      return collision;
+  }
+
+  animateAngryBoss(){
+    setInterval(()=>{
+      this.playAnimation(this.IMAGES_ANGRY);
+    }, 400)
   }
 
 }
