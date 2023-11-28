@@ -3,6 +3,7 @@ class World {
   statusbar = new StatusBar();
   coinbar = new CoinBar();
   bottlebar = new BottleBar();
+  endbossbar = new Endbosshp();
   throwableObject = [];
   bottleCount = 0;
   lowEnemy = level1.lowEnemy;
@@ -58,6 +59,7 @@ class World {
 
   animateBossAfterGetHit(){
     this.endboss[0].animateAngryBoss();
+    this.endbossbar.setPercentage(this.endboss.bosshp)
   }
 
   checkThrowObjects() {
@@ -99,7 +101,6 @@ class World {
         this.statusbar.setPercentage(this.character.energy);
         this.character.coin -= 10;
         this.coinbar.coinReduce(this.character.coin);
-        console.log(this.character.energy);
       }
     });
   }
@@ -167,6 +168,7 @@ class World {
     this.addToMap(this.statusbar);
     this.addToMap(this.coinbar);
     this.addToMap(this.bottlebar);
+    this.addToMap(this.endbossbar)
 
     this.ctx.translate(this.camera_x, 0);
 
