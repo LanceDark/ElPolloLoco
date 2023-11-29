@@ -22,12 +22,21 @@ function startScreen() {
   };
 }
 
+function refBack(){
+  window.location.href = "index.html"
+}
 
 function init() {
   canvas = document.getElementById("playground");
   world = new World(canvas, keyboard);
   console.log("My Character is", world.character);
   deleteButton();
+  deleteStory();
+}
+
+function deleteStory(){
+  let storyContent = document.getElementById("story-container") 
+  storyContent.style.display = "none"
 }
 
 function  deleteButton(){
@@ -58,6 +67,12 @@ function getNewBackground(){
 
 function pepeStory(){
   getNewBackground();
+  deleteButton()
+  openPepeStory()
+}
+
+function openPepeStory(){
+  story();
 }
 
 window.addEventListener("keydown", (e) => {

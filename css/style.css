@@ -24,4 +24,30 @@ button {
     padding: 10px 20px;
     margin: 10px;
     font-size: 16px;
+    border-radius: 15px;
+    background-color: chocolate;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: yellowgreen;
+}
+
+#story-container {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.story-content{
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 100px;
+}
+
+.return-button{
+    display: flex;
 }
