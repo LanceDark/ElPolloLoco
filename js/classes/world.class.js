@@ -28,35 +28,58 @@ class World {
   }
 
   run() {
-    setInterval(() => {
-      this.checkBossCollision();
-      this.checkHealth();
-      this.checkCollisions();
-      this.checkCollect();
-      this.checkThrowObjects();
-      this.checkBottleCollect();
-      this.checkJumpOnEnemy();
-    }, 250);
+    if (!this.bossCollision) {
+      this.bossCollision = setInterval(() => {
+        this.checkBossCollision();
+        this.checkHealth();
+        this.checkCollisions();
+        this.checkCollect();
+        this.checkThrowObjects();
+        this.checkBottleCollect();
+        this.checkJumpOnEnemy();
+      }, 250);
+    }
   }
 
   checkBossCollision() {
     if (this.endboss && this.endboss.length > 0) {
       this.throwableObject.forEach((bottle) => {
-        if (this.endboss[0].isCollidingBoss(bottle) && !bottle.bottleIsCollidingBoss) {
-          bottle.bottleIsCollidingBoss = true;
-          if ((bottle.isPlayingAnimation = true)) {
-            bottle.stopAnimation();
-            bottle.splashAnimation();
-            setTimeout(() => {
-              this.removeObject(bottle);
-              this.animateBossAfterGetHit();
-            }, 1500);
-            this.endbossbar.endbossHit(20);
-            this.endbossbar.setPercentage(this.endbossbar.bosshp);
-          }
+        if (
+          this.endboss[0].isCollidingBoss(bottle) &&
+          !bottle.bottleIsCollidingBoss
+        ) {
+          this.handleCollidingBottle(bottle);
         }
       });
     }
+  }
+
+  handleCollidingBottle(bottle) {
+    bottle.bottleIsCollidingBoss = true;
+    if (bottle.isPlayingAnimation) {
+      this.handleAnimation(bottle);
+      this.endbossbar.endbossHit(20);
+      this.endbossbar.setPercentage(this.endbossbar.bosshp);
+      if (this.endbossbar.bosshp == 0) {
+        clearInterval(this.bossCollision);
+        this.bossCollision = null; 
+        this.endboss[0].animateDeadBoss();
+      }
+    }
+  }
+
+  handleAnimation(bottle) {
+    bottle.stopAnimation();
+    bottle.splashAnimation();
+    this.bossCollision = setTimeout(() => {
+      this.removeObject(bottle);
+      this.animateBossAfterGetHit();
+    }, 1500);
+  }
+
+  animateBossAfterGetHit() {
+    this.endboss[0].animateAngryBoss();
+    // Weitere Aktionen für die Bossanimation, falls erforderlich
   }
 
   animateBossAfterGetHit() {
