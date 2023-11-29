@@ -27,12 +27,19 @@
     
 </head>
 <!-- <body onload="startScreen()"-->
-<body onload="init()"> 
+<body onload="startScreen()"> 
 
     <h1>El Pollo Locco</h1>
     
     <canvas width="720" height="480" id="playground">
         <button>Start</button>
     </canvas>
+
+    <div id="menu">
+        <button onclick="init()">Start Level</button>
+        <button onclick="openLevelSelect()">Select Level</button>
+        <button onclick="pepeStory()">About Pepe</button>
+        <button onclick="openSettings()">Settings</button>
+    </div>
 </body>
 </html>
