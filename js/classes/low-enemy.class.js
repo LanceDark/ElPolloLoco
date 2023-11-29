@@ -26,10 +26,10 @@ class LowEnemy extends MoveableObject {
 
   adjustHitbox() {
     this.hitbox = {
-      x: this.x,
-      y: this.y,
-      width: this.width,
-      height: this.height,
+      x: this.x + 10,
+      y: this.y + 110,
+      width: this.width - 20,
+      height: this.height - 110,
     };
   }
 
@@ -60,6 +60,7 @@ class LowEnemy extends MoveableObject {
         this.playAnimation(this.IMAGES_WALKING);
       }
     }, 200);
+    this.adjustHitbox();
   }
 
   updatePosition() {

@@ -83,10 +83,10 @@ class Character extends MoveableObject {
 
   adjustHitbox() {
     this.hitbox = {
-      x: this.x,
-      y: this.y,
-      width: this.width,
-      height: this.height,
+      x: this.x + 10,
+      y: this.y + 110,
+      width: this.width - 20,
+      height: this.height - 110,
     };
   }
 
@@ -108,6 +108,7 @@ class Character extends MoveableObject {
       if (this.world.keyboard.SPACE && !this.isAboveGround()) {
         this.jump();
       }
+      this.adjustHitbox();
       this.world.camera_x = -this.x + 75;
     }, 1000 / 60);
 

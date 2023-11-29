@@ -28,17 +28,16 @@ class World {
   }
 
   run() {
-    if (!this.bossCollision) {
-      this.bossCollision = setInterval(() => {
-        this.checkBossCollision();
-        this.checkHealth();
-        this.checkCollisions();
-        this.checkCollect();
-        this.checkThrowObjects();
-        this.checkBottleCollect();
-        this.checkJumpOnEnemy();
-      }, 250);
-    }
+    setInterval(() => {
+      this.checkBossHealth();
+      this.checkBossCollision();
+      this.checkHealth();
+      this.checkCollisions();
+      this.checkCollect();
+      this.checkThrowObjects();
+      this.checkBottleCollect();
+      this.checkJumpOnEnemy();   
+    }, 250);
   }
 
   checkBossCollision() {
@@ -60,12 +59,15 @@ class World {
       this.handleAnimation(bottle);
       this.endbossbar.endbossHit(20);
       this.endbossbar.setPercentage(this.endbossbar.bosshp);
-      if (this.endbossbar.bosshp == 0) {
-        clearInterval(this.bossCollision);
-        this.bossCollision = null; 
-        this.endboss[0].animateDeadBoss();
-      }
     }
+  }
+
+  checkBossHealth() {
+    if (this.endboss[0].bosshp == 0) {
+      console.log(this.endboss[0].bosshp)
+      this.endBoss[0].animateDeadBoss();
+    } else 
+    return;
   }
 
   handleAnimation(bottle) {
@@ -74,12 +76,7 @@ class World {
     this.bossCollision = setTimeout(() => {
       this.removeObject(bottle);
       this.animateBossAfterGetHit();
-    }, 1500);
-  }
-
-  animateBossAfterGetHit() {
-    this.endboss[0].animateAngryBoss();
-    // Weitere Aktionen für die Bossanimation, falls erforderlich
+    }, 500);
   }
 
   animateBossAfterGetHit() {
