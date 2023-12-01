@@ -51,14 +51,15 @@ class Endboss extends MoveableObject {
     this.x = 2500;
     this.speed = 0.15 + Math.random() * 0.25;
     this.animateEndboss();
+
   }
 
   adjustHitbox() {
     this.hitbox = {
-      x: this.x,
-      y: this.y,
-      width: this.width,
-      height: this.height,
+      x: this.x + 45,
+      y: this.y + 70,
+      width: this.width - 35, 
+      height: this.height - 70,
     };
   }
 
@@ -68,15 +69,16 @@ class Endboss extends MoveableObject {
     }, 200)
     setInterval(() => {
       this.moveLeft()
+      this.adjustHitbox()
     },1000 / 60)
   }
 
   isCollidingBoss(boss) {
     let collision = 
-      this.x < boss.x + boss.width &&
-      this.x + this.width > boss.x &&
-      this.y < boss.y + boss.height &&
-      this.y + this.height > boss.y;
+      this.hitbox.x < boss.x + boss.width &&
+      this.hitbox.x + this.hitbox.width > boss.x &&
+      this.hitbox.y < boss.y + boss.height &&
+      this.hitbox.y + this.hitbox.height > boss.y;
 
       this.bottleIsCollidingBoss = 0;
 

@@ -1,5 +1,5 @@
 class LowEnemy extends MoveableObject {
-  y = 340;
+  y = 355;
   height = 90;
   IMAGES_WALKING = [
     "./img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
@@ -26,10 +26,10 @@ class LowEnemy extends MoveableObject {
 
   adjustHitbox() {
     this.hitbox = {
-      x: this.x + 10,
-      y: this.y + 110,
-      width: this.width - 20,
-      height: this.height - 110,
+      x: this.x,
+      y: this.y,
+      width: this.width,
+      height: this.height,
     };
   }
 
@@ -51,6 +51,7 @@ class LowEnemy extends MoveableObject {
     setInterval(() => {
       if (!this.isDead) {
         this.moveLeft();
+        this.adjustHitbox()
       }
       this.updatePosition();
     }, 1000 / 60);
