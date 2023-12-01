@@ -29,6 +29,7 @@ class World {
 
   run() {
     setInterval(() => {
+      this.checkEndbossHealth();
       this.checkBossCollision();
       this.checkHealth();
       this.checkCollisions();
@@ -52,6 +53,10 @@ class World {
     }
   }
 
+  checkEndbossHealth(){
+    this.endboss[0].checkBossHp();
+  }
+
   handleCollidingBottle(bottle) {
     bottle.bottleIsCollidingBoss = true;
     if (bottle.isPlayingAnimation) {
@@ -67,7 +72,7 @@ class World {
     bottle.splashAnimation();
     this.bossCollision = setTimeout(() => {
       this.removeObject(bottle);
-      //this.animateBossAfterGetHit();
+      this.animateBossAfterGetHit();
     }, 500);
   }
 

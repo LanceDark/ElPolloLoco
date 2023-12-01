@@ -86,14 +86,7 @@ class Endboss extends MoveableObject {
         this.moveLeft();
         this.adjustHitbox();
       }, 1000 / 60);
-    console.log("bosshp" + this.bosshp)
-    } else if (this.bosshp === 0) {
-      console.log("if wird ausgeführt")
-      clearInterval(this.angryInterval);
-      clearInterval(this.moveInterval);
-      clearInterval(this.moveIntervalId);
-      this.animateDeadBoss();
-    }
+    } 
   }
 
   isCollidingBoss(boss) {
@@ -108,23 +101,32 @@ class Endboss extends MoveableObject {
     return collision;
   }
 
+  checkBossHp() {
+    if (this.bosshp === 0) {
+      console.log("if wird ausgeführt")
+      clearInterval(this.angryInterval);
+      clearInterval(this.moveInterval);
+      clearInterval(this.angryInterval2)
+      clearInterval(this.moveIntervalId);
+      this.animateDeadBoss();
+    }
+  }
+
   animateAngryBoss() {
+    console.log("animateAngryBoss wird aufgerufen");
     this.angryInterval = setInterval(() => {
       this.playAnimation(this.IMAGES_ANGRY);
     }, 600);
   }
 
   animateAngryMoveBoss() {
-    this.angryInterval = setInterval(() => {
+    this.angryInterval2 = setInterval(() => {
       this.playAnimation(this.IMAGES_ANGRY_WALK);
     }, 400);
   }
 
   animateDeadBoss() {
-    console.log("hey")
-    setTimeout(() => {
-      console.log("das ist nur test")
-      this.playAnimation(this.IMAGES_DEAD);
-    }, 500);
+    this.playAnimation(this.IMAGES_DEAD);
   }
+
 }
