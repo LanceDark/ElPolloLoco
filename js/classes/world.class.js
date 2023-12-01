@@ -29,14 +29,13 @@ class World {
 
   run() {
     setInterval(() => {
-      this.checkBossHealth();
       this.checkBossCollision();
       this.checkHealth();
       this.checkCollisions();
       this.checkCollect();
       this.checkThrowObjects();
       this.checkBottleCollect();
-      this.checkJumpOnEnemy();   
+      this.checkJumpOnEnemy();
     }, 250);
   }
 
@@ -58,16 +57,9 @@ class World {
     if (bottle.isPlayingAnimation) {
       this.handleAnimation(bottle);
       this.endbossbar.endbossHit(20);
+      this.endboss[0].endbossHitDamage(20);
       this.endbossbar.setPercentage(this.endbossbar.bosshp);
     }
-  }
-
-  checkBossHealth() {
-    if (this.endboss[0].bosshp == 0) {
-      console.log(this.endboss[0].bosshp)
-      this.endBoss[0].animateDeadBoss();
-    } else 
-    return;
   }
 
   handleAnimation(bottle) {
@@ -75,7 +67,7 @@ class World {
     bottle.splashAnimation();
     this.bossCollision = setTimeout(() => {
       this.removeObject(bottle);
-      this.animateBossAfterGetHit();
+      //this.animateBossAfterGetHit();
     }, 500);
   }
 
@@ -110,14 +102,16 @@ class World {
         enemy.removeChicken();
       }
       if (enemy.isDead) {
-        enemy.y += enemy.speed; // Bewege nur "tote" Hühner nach unten
+        enemy.hitbox.y += enemy.speed; // Bewege nur "tote" Hühner nach unten
       }
     });
   }
 
   checkCollisions() {
     this.level.lowEnemy.forEach((enemy) => {
-      if (this.character.isColliding(enemy)) {
+      enemy.adjustHitbox();
+    if (enemy.hitbox && this.character.isColliding(enemy)) {
+        console.log(this.hitbox.x)
         this.character.hit();
         this.statusbar.setPercentage(this.character.energy);
         this.character.coin -= 10;

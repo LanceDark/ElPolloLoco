@@ -18,7 +18,7 @@ class LowEnemy extends MoveableObject {
     super().loadImage("./img/3_enemies_chicken/chicken_normal/1_walk/1_w.png");
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_CHICKEN_DEAD);
-    this.x = 200 + Math.random() * 2000;
+    this.x = 350 + Math.random() * 2000;
     this.speed = 0.15 + Math.random() * 0.25;
     this.animateChicken();
     this.imageUrl = imageUrl;
@@ -26,10 +26,10 @@ class LowEnemy extends MoveableObject {
 
   adjustHitbox() {
     this.hitbox = {
-      x: this.x,
-      y: this.y,
-      width: this.width,
-      height: this.height,
+      x: this.x + 0,
+      y: this.y + 20,
+      width: this.width + 0,
+      height: this.height - 20,
     };
   }
 
@@ -54,6 +54,7 @@ class LowEnemy extends MoveableObject {
         this.adjustHitbox()
       }
       this.updatePosition();
+      this.adjustHitbox()
     }, 1000 / 60);
 
     setInterval(() => {

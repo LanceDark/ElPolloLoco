@@ -77,8 +77,8 @@ class Character extends MoveableObject {
     this.loadImages(this.IMAGES_IDLE);
     this.loadImages(this.IMAGES_IDLE_LONG);
     this.loadImage(this.IMAGES_PEPE_DEAD);
-    this.applyGravity();
     this.animateCharacter();
+    this.applyGravity();
   }
 
   adjustHitbox() {
@@ -91,21 +91,25 @@ class Character extends MoveableObject {
   }
 
   animateCharacter() {
+    this.adjustHitbox();
     setInterval(() => {
       this.walking_sound.pause();
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.moveRight();
         this.otherDirection = false;
         this.walking_sound.play();
+        this.adjustHitbox();
       }
 
       if (this.world.keyboard.LEFT && this.x > -200) {
         this.moveLeft();
         this.otherDirection = true;
         this.walking_sound.play();
+        this.adjustHitbox();
       }
 
       if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+        this.adjustHitbox();
         this.jump();
       }
       this.adjustHitbox();

@@ -28,19 +28,22 @@ class MoveableObject extends DrawableObject {
 
   // character.isColliding.chicken()
   isColliding(MoveableObject) {
+    if (this.hitbox && MoveableObject.hitbox) {
     return (
-      this.hitbox.x + this.hitbox.width > MoveableObject.x &&
-      this.hitbox.y + this.hitbox.height > MoveableObject.y &&
-      this.hitbox.x < MoveableObject.x &&
-      this.hitbox.y < MoveableObject.y + MoveableObject.height
+      this.hitbox.x + this.hitbox.width > MoveableObject.hitbox.x &&
+      this.hitbox.y + this.hitbox.height > MoveableObject.hitbox.y &&
+      this.hitbox.x < MoveableObject.hitbox.x + MoveableObject.hitbox.width &&
+      this.hitbox.y < MoveableObject.hitbox.y + MoveableObject.hitbox.height
     );
+    }
   }
+  
 
   isJumpingOnChicken(MoveableObject, lowEnemy) {
     return (
-      MoveableObject.y + MoveableObject.height < lowEnemy.y &&
-      MoveableObject.x + MoveableObject.width > lowEnemy.x &&
-      MoveableObject.x < lowEnemy.x + lowEnemy.width
+      MoveableObject.hitbox.y + MoveableObject.hitbox.height < lowEnemy.hitbox.y &&
+      MoveableObject.hitbox.x + MoveableObject.hitbox.width > lowEnemy.hitbox.x &&
+      MoveableObject.hitbox.x < lowEnemy.hitbox.x + lowEnemy.hitbox.width
     );
   }
 
