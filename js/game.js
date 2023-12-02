@@ -46,6 +46,8 @@ function  deleteButton(){
 
 function openSettings(){
   getNewBackground();
+  deleteButton()
+  openSetting();
 }
 
 function getNewBackground(){

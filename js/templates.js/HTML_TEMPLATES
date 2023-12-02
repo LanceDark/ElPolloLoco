@@ -8,3 +8,14 @@ function story(){
     <button id="start-btn" onclick="init()">Starte das Abenteuer!</button>
     `
 }
+
+function openSetting(){
+    let settingsContent = document.getElementById("story-container")
+    settingsContent.innerHTML += /*html*/ `
+    <button class="return-button" onclick="refBack()">Back</button>
+    <h1>Settings</h1>
+    <p class="story-content">Improve your gameplay here!</p>
+    
+    <button id="start-btn" onclick="init()">Starte das Abenteuer!</button>
+    `
+}
