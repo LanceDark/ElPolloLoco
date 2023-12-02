@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>El Pollo Loco</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/style.css" />
     <script src="./js/templates.js/HTML_TEMPLATES"></script>
     <script src="./js/classes/drawable-object.class.js"></script>
     <script src="./js/classes/movable-object.class.js"></script>
@@ -25,26 +25,40 @@
     <script src="./js/classes/level.class.js"></script>
     <script src="./levels/level1.js"></script>
     <script src="./js/game.js"></script>
-    
-</head>
-<!-- <body onload="startScreen()"-->
-<body onload="startScreen()"> 
-
+  </head>
+  <!-- <body onload="startScreen()"-->
+  <body onload="startScreen()">
     <h1>El Pollo Locco</h1>
-    
+
     <canvas width="720" height="480" id="playground">
-        <button>Start</button>
+      <button>Start</button>
     </canvas>
+    <section>
+      <div>
+        <img src="./img/keyimg/leftkey.png" alt="" />
+        <p>Move Left</p>
+      </div>
+      <div>
+        <img src="./img/keyimg/rightkey.png" alt="" />
+        <p>Move Right</p>
+      </div>
+      <div>
+        <img src="./img/keyimg/sapcekey.png" alt="" />
+        <p>Jump</p>
+      </div>
+      <div>
+        <img src="./img/keyimg/dkey.png" alt="" />
+        <p>Throw</p>
+      </div>
+    </section>
 
     <div id="menu">
-        <button onclick="init()">Start Level</button>
-        <button onclick="openLevelSelect()">Select Level</button>
-        <button onclick="pepeStory()">About Pepe</button>
-        <button onclick="openSettings()">Settings</button>
+      <button onclick="init()">Start Level</button>
+      <button onclick="openLevelSelect()">Select Level</button>
+      <button onclick="pepeStory()">About Pepe</button>
+      <button onclick="openSettings()">Settings</button>
     </div>
 
-    <div id="story-container">
-
-    </div>
-</body>
+    <div id="story-container"></div>
+  </body>
 </html>
