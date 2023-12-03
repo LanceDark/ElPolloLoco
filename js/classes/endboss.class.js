@@ -127,6 +127,10 @@ class Endboss extends MoveableObject {
 
   animateDeadBoss() {
     this.playAnimation(this.IMAGES_DEAD);
+    this.y += 100;
+    setTimeout(() =>{
+      gameOverScreen()
+    }, 300)
   }
 
 }

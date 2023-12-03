@@ -26,10 +26,9 @@ function refBack(){
   window.location.href = "index.html"
 }
 
-function init() {
+async function init() {
   canvas = document.getElementById("playground");
   world = new World(canvas, keyboard);
-  console.log("My Character is", world.character);
   deleteButton();
   deleteStory();
 }
@@ -75,6 +74,25 @@ function pepeStory(){
 
 function openPepeStory(){
   story();
+}
+
+function gameOverScreen(){
+  let canvas = document.getElementById("playground");
+  let ctx = canvas.getContext("2d");
+  let img = new Image();
+  img.src = "./img/9_intro_outro_screens/game_over/game over!.png";
+
+  img.onload = () => {
+    console.log("img geladen")
+    console.log(img)
+    let maxWidth = 720;
+    let maxHeight = 480;
+
+    let width = Math.min(maxWidth, img.width);
+    let height = Math.min(maxHeight, img.height);
+
+    ctx.drawImage(img, 0, 0, 720, 480);
+  };
 }
 
 window.addEventListener("keydown", (e) => {
