@@ -1,6 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let isMuted = false;
 
 /**
  * starting screen, inits backgroundimg and a button to start the game
@@ -93,6 +94,18 @@ function gameOverScreen(){
 
     ctx.drawImage(img, 0, 0, 720, 480);
   };
+}
+
+function musicToggle(){
+  if (isMuted) {
+    isMuted = false;
+    console.log(isMuted)
+} else {
+    isMuted = true;
+    console.log(isMuted)
+    document.querySelectorAll('audio').forEach(function (audioElement) {
+      audioElement.muted = isMuted;
+})}
 }
 
 window.addEventListener("keydown", (e) => {
