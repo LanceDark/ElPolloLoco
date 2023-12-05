@@ -98,3 +98,8 @@ p{
     background-size: cover; 
     backdrop-filter: blur(10px);
 }
+
+.option-div {
+    display: flex;
+    flex-direction: column;
+}

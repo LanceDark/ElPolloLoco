@@ -86,13 +86,17 @@ function gameOverScreen() {
 function fullscreen() {
   let content = document.getElementById("content-main");
   let canvas = document.getElementById("playground");
+  let fullscreenDiv = document.getElementById('fullScreen');
+  fullscreenDiv.innerHTML = '';
 
   if (!fullScreen) {
+    fullscreenDiv.innerHTML += 'Vollbild'
     canvas.style.width = "100%";
     canvas.style.height = "100%";
     applyFullscreen(content);
     fullScreen = true;
   } else {
+    fullscreenDiv.innerHTML += 'kein Vollbild'
     canvas.style.width = "720px";
     canvas.style.height = "480px";
     endFullScreen();
@@ -119,12 +123,14 @@ function endFullScreen() {
 }
 
 function musicToggle() {
+  let soundButton = document.getElementById('soundButton');
+  soundButton.innerHTML = '';
   if (isMuted) {
     isMuted = false;
-    console.log(isMuted);
+    soundButton.innerHTML += `Ton An`;
   } else {
+    soundButton.innerHTML += `Ton Aus`;
     isMuted = true;
-    console.log(isMuted);
     document.querySelectorAll("audio").forEach(function (audioElement) {
       audioElement.muted = isMuted;
     });

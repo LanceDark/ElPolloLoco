@@ -1,23 +1,28 @@
-function story(){
-    let storyContent = document.getElementById("story-container") 
-    storyContent.innerHTML += /*html*/ ` 
-    <button class="return-button" onclick="refBack()">Back</button>
-    <h1>Mexican Adventure: Das große Chicken</h1>
-    <p class="story-content">Es war einmal in Mexiko, ein tapferer Mexikaner namens Pepe, der das Land vor dem großen Chicken retten musste. Das Chicken terrorisierte die Dörfer und fraß alles, was ihm in den Weg kam. Pepe hatte eine besondere Fähigkeit - er konnte das Chicken nur mit magischer Salsa besiegen!</p>
-    
-    <button id="start-btn" onclick="init()">Starte das Abenteuer!</button>
-    `
-}
+function story(){ 
+let storyContent = document.getElementById("story-container");
+storyContent.innerHTML += /*html*/ `
+<button class="return-button" onclick="refBack()">Back</button>
+<h1>Mexican Adventure: Das große Chicken</h1>
+<p class="story-content">
+  Es war einmal in Mexiko, ein tapferer Mexikaner namens Pepe, der das Land vor
+  dem großen Chicken retten musste. Das Chicken terrorisierte die Dörfer und
+  fraß alles, was ihm in den Weg kam. Pepe hatte eine besondere Fähigkeit - er
+  konnte das Chicken nur mit magischer Salsa besiegen!
+</p>
 
-function openSetting(){
-    let settingsContent = document.getElementById("story-container")
-    settingsContent.innerHTML += /*html*/ `
-    <button class="return-button" onclick="refBack()">Back</button>
-    <h1>Settings</h1>
-    <p class="story-content">Improve your gameplay here!</p>
-    <button onclick="musicToggle()">Ton an/aus</button>
-    <button onclick="fullscreen()">Vollbild</button>
-    
-    <button id="start-btn" onclick="init()">Starte das Abenteuer!</button>
-    `
-}
+<button id="start-btn" onclick="init()">Starte das Abenteuer!</button>
+` } 
+
+function openSetting(){ 
+let settingsContent = document.getElementById("story-container");
+settingsContent.innerHTML += /*html*/
+`
+<button class="return-button" onclick="refBack()">Back</button>
+<h1>Settings</h1>
+<p class="story-content">Improve your gameplay here!</p>
+<div class="option-div">
+  <button onclick="musicToggle()" id="soundButton">Ton an</button>
+  <button onclick="fullscreen()" id="fullScreen">kein Vollbild</button>
+  <button id="start-btn" onclick="init()">Starte das Abenteuer!</button>
+</div>
+` }
