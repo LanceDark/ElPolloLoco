@@ -89,9 +89,9 @@ p{
     z-index: 3;
     display: none;
     top: 34%;
-    left: 50%;
+    left: 45%;
     position: absolute;
-    transform: translate(-50%, -50%);
+    transform: translate(-42.3%, -50%);
     text-align: center;
     width: 720px; /* Breite des Canvas */
     height: 480px; 
