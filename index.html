@@ -29,42 +29,43 @@
   <!-- <body onload="startScreen()"-->
   <body onload="startScreen()">
     <h1>El Pollo Locco</h1>
+    <main id="content-main">
+      <canvas width="720" height="480" id="playground">
+        <button>Start</button>
+      </canvas>
+      <section class="description-div">
+        <div class="explain-div">
+          <img src="./img/keyimg/leftkey.png" alt="" />
+          <p>Move Left</p>
+        </div>
+        <div class="explain-div">
+          <img src="./img/keyimg/rightkey.png" alt="" />
+          <p>Move Right</p>
+        </div>
+        <div class="explain-div">
+          <img src="./img/keyimg/sapcekey.png" alt="" />
+          <p>Jump</p>
+        </div>
+        <div class="explain-div">
+          <img src="./img/keyimg/dkey.png" alt="" />
+          <p>Throw</p>
+        </div>
+      </section>
 
-    <canvas width="720" height="480" id="playground">
-      <button>Start</button>
-    </canvas>
-    <section class="description-div">
-      <div class="explain-div">
-        <img src="./img/keyimg/leftkey.png" alt="" />
-        <p>Move Left</p>
+      <div class="game-over-screen" id="game-over-screen">
+        <div class="explain-div">
+          <button onclick="refBack()">Back to Menu</button>
+        </div>
       </div>
-      <div class="explain-div">
-        <img src="./img/keyimg/rightkey.png" alt="" />
-        <p>Move Right</p>
-      </div>
-      <div class="explain-div">
-        <img src="./img/keyimg/sapcekey.png" alt="" />
-        <p>Jump</p>
-      </div>
-      <div class="explain-div">
-        <img src="./img/keyimg/dkey.png" alt="" />
-        <p>Throw</p>
-      </div>
-    </section>
 
-    <div class="game-over-screen" id="game-over-screen">
-      <div class="explain-div">
-        <button onclick="refBack()">Back to Menu</button>
+      <div id="menu">
+        <button onclick="init()">Start Level</button>
+        <button onclick="openLevelSelect()">Select Level</button>
+        <button onclick="pepeStory()">About Pepe</button>
+        <button onclick="openSettings()">Settings</button>
       </div>
-    </div>
 
-    <div id="menu">
-      <button onclick="init()">Start Level</button>
-      <button onclick="openLevelSelect()">Select Level</button>
-      <button onclick="pepeStory()">About Pepe</button>
-      <button onclick="openSettings()">Settings</button>
-    </div>
-
-    <div id="story-container"></div>
+      <div id="story-container"></div>
+    </main>
   </body>
 </html>

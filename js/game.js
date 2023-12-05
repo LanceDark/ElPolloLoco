@@ -2,6 +2,7 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let isMuted = false;
+let fullScreen = false;
 
 /**
  * starting screen, inits backgroundimg and a button to start the game
@@ -78,8 +79,43 @@ function openPepeStory() {
 }
 
 function gameOverScreen() {
- let end = document.getElementById("game-over-screen");
- end.style.display = 'flex';
+  let end = document.getElementById("game-over-screen");
+  end.style.display = "flex";
+}
+
+function fullscreen() {
+  let content = document.getElementById("content-main");
+  let canvas = document.getElementById("playground");
+
+  if (!fullScreen) {
+    canvas.style.width = "100%";
+    canvas.style.height = "100%";
+    applyFullscreen(content);
+    fullScreen = true;
+  } else {
+    canvas.style.width = "720px";
+    canvas.style.height = "480px";
+    endFullScreen();
+    fullScreen = false;
+  }
+}
+
+function applyFullscreen(element) {
+  if (element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if (element.msRequestFullscreen) {
+    element.msRequestFullscreen();
+  } else if (element.webkitRequestFullscreen) {
+    element.webkitRequestFullscreen();
+  }
+}
+
+function endFullScreen() {
+  if(document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if(document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+  }
 }
 
 function musicToggle() {

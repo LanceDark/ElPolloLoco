@@ -14,8 +14,9 @@ function openSetting(){
     settingsContent.innerHTML += /*html*/ `
     <button class="return-button" onclick="refBack()">Back</button>
     <h1>Settings</h1>
-    <p class="story-content">Improve your gameplay here!</p>3
+    <p class="story-content">Improve your gameplay here!</p>
     <button onclick="musicToggle()">Ton an/aus</button>
+    <button onclick="fullscreen()">Vollbild</button>
     
     <button id="start-btn" onclick="init()">Starte das Abenteuer!</button>
     `
