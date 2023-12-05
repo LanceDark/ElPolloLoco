@@ -83,3 +83,18 @@ p{
     text-align: center;
     align-items: center;
 }
+
+.game-over-screen {
+    background-image: url('img/9_intro_outro_screens/game_over/game over.png');
+    z-index: 3;
+    display: none;
+    top: 34%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 720px; /* Breite des Canvas */
+    height: 480px; 
+    background-size: cover; 
+    backdrop-filter: blur(10px);
+}
