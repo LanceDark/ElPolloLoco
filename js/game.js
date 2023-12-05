@@ -23,8 +23,8 @@ function startScreen() {
   };
 }
 
-function refBack(){
-  window.location.href = "index.html"
+function refBack() {
+  window.location.href = "index.html";
 }
 
 async function init() {
@@ -34,23 +34,23 @@ async function init() {
   deleteStory();
 }
 
-function deleteStory(){
-  let storyContent = document.getElementById("story-container") 
-  storyContent.style.display = "none"
+function deleteStory() {
+  let storyContent = document.getElementById("story-container");
+  storyContent.style.display = "none";
 }
 
-function  deleteButton(){
-  let menuButtons = document.getElementById("menu")
-  menuButtons.style.display = "none"
+function deleteButton() {
+  let menuButtons = document.getElementById("menu");
+  menuButtons.style.display = "none";
 }
 
-function openSettings(){
+function openSettings() {
   getNewBackground();
-  deleteButton()
+  deleteButton();
   openSetting();
 }
 
-function getNewBackground(){
+function getNewBackground() {
   let canvas = document.getElementById("playground");
   let ctx = canvas.getContext("2d");
   let img = new Image();
@@ -67,25 +67,25 @@ function getNewBackground(){
   };
 }
 
-function pepeStory(){
+function pepeStory() {
   getNewBackground();
-  deleteButton()
-  openPepeStory()
+  deleteButton();
+  openPepeStory();
 }
 
-function openPepeStory(){
+function openPepeStory() {
   story();
 }
 
-function gameOverScreen(){
+function gameOverScreen() {
   let canvas = document.getElementById("playground");
   let ctx = canvas.getContext("2d");
   let img = new Image();
   img.src = "./img/9_intro_outro_screens/game_over/game over!.png";
 
   img.onload = () => {
-    console.log("img geladen")
-    console.log(img)
+    console.log("img geladen");
+    console.log(img);
     let maxWidth = 720;
     let maxHeight = 480;
 
@@ -96,16 +96,17 @@ function gameOverScreen(){
   };
 }
 
-function musicToggle(){
+function musicToggle() {
   if (isMuted) {
     isMuted = false;
-    console.log(isMuted)
-} else {
+    console.log(isMuted);
+  } else {
     isMuted = true;
-    console.log(isMuted)
-    document.querySelectorAll('audio').forEach(function (audioElement) {
+    console.log(isMuted);
+    document.querySelectorAll("audio").forEach(function (audioElement) {
       audioElement.muted = isMuted;
-})}
+    });
+  }
 }
 
 window.addEventListener("keydown", (e) => {
@@ -149,4 +150,3 @@ window.addEventListener("keyup", (e) => {
     keyboard.D = false;
   }
 });
-

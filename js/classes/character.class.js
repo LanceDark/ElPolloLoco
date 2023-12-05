@@ -97,7 +97,9 @@ class Character extends MoveableObject {
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.moveRight();
         this.otherDirection = false;
+        if (!isMuted) {
         this.walking_sound.play();
+        }
         this.adjustHitbox();
       }
 
