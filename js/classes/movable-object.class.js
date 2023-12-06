@@ -7,7 +7,7 @@ class MoveableObject extends DrawableObject {
   lastHit = 0;
   coin = 0;
   bottle = 0;
-  bosshp = 100
+  bosshp = 100;
 
   applyGravity() {
     setInterval(() => {
@@ -25,23 +25,22 @@ class MoveableObject extends DrawableObject {
     return this.y < 140;
   }
 
-
   // character.isColliding.chicken()
   isColliding(MoveableObject) {
     if (this.hitbox && MoveableObject.hitbox) {
-    return (
-      this.hitbox.x + this.hitbox.width > MoveableObject.hitbox.x &&
-      this.hitbox.y + this.hitbox.height > MoveableObject.hitbox.y &&
-      this.hitbox.x < MoveableObject.hitbox.x + MoveableObject.hitbox.width &&
-      this.hitbox.y < MoveableObject.hitbox.y + MoveableObject.hitbox.height
-    );
+      return (
+        this.hitbox.x + this.hitbox.width > MoveableObject.hitbox.x &&
+        this.hitbox.y + this.hitbox.height > MoveableObject.hitbox.y &&
+        this.hitbox.x < MoveableObject.hitbox.x + MoveableObject.hitbox.width &&
+        this.hitbox.y < MoveableObject.hitbox.y + MoveableObject.hitbox.height
+      );
     }
   }
-  
-
   isJumpingOnChicken(MoveableObject, lowEnemy) {
+    const tolerance = 20; // Ändere diese Zahl je nach Bedarf
     return (
-      MoveableObject.hitbox.y + MoveableObject.hitbox.height < lowEnemy.hitbox.y &&
+      MoveableObject.hitbox.y <= lowEnemy.hitbox.y + lowEnemy.hitbox.height &&
+      MoveableObject.hitbox.y + MoveableObject.hitbox.height + tolerance >= lowEnemy.hitbox.y &&
       MoveableObject.hitbox.x + MoveableObject.hitbox.width > lowEnemy.hitbox.x &&
       MoveableObject.hitbox.x < lowEnemy.hitbox.x + lowEnemy.hitbox.width
     );
@@ -76,7 +75,7 @@ class MoveableObject extends DrawableObject {
   }
 
   isDead() {
-    return this.energy === 0;    
+    return this.energy === 0;
   }
 
   coinCollect() {

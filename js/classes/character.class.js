@@ -67,6 +67,10 @@ class Character extends MoveableObject {
   currentImage = 0;
   world;
   walking_sound = new Audio("./music/Walking.mp3");
+  hitboxOffsetX = 10;
+  hitboxOffesetY = 110;
+  hitboxOffsetWidth = 20;
+  hitboxOffsetHeight = 110;
 
   constructor() {
     super().loadImage("./img/2_character_pepe/1_idle/idle/I-1.png");
@@ -83,10 +87,10 @@ class Character extends MoveableObject {
 
   adjustHitbox() {
     this.hitbox = {
-      x: this.x + 10,
-      y: this.y + 110,
-      width: this.width - 20,
-      height: this.height - 110,
+      x: this.x + this.hitboxOffsetX,
+      y: this.y + this.hitboxOffesetY,
+      width: this.width - this.hitboxOffsetWidth,
+      height: this.height - this.hitboxOffsetHeight,
     };
   }
 

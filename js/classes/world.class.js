@@ -99,15 +99,17 @@ class World {
   }
 
   checkJumpOnEnemy() {
-    this.level.lowEnemy.forEach((enemy) => {
-      if (this.character.isJumpingOnChicken(this.character, enemy)) {
-        enemy.updateImage(
+    this.level.lowEnemy.forEach((lowEnemy) => {
+      this.character.adjustHitbox();
+      lowEnemy.adjustHitbox();
+       if (this.character.isJumpingOnChicken(this.character, lowEnemy)) {
+        lowEnemy.updateImage(
           "./img/3_enemies_chicken/chicken_normal/2_dead/dead.png"
         );
-        enemy.removeChicken();
+        lowEnemy.removeChicken();
       }
-      if (enemy.isDead) {
-        enemy.hitbox.y += enemy.speed; // Bewege nur "tote" Hühner nach unten
+      if (lowEnemy.isDead) {
+        lowEnemy.hitbox.y += lowEnemy.speed; // Bewege nur "tote" Hühner nach unten
       }
     });
   }
@@ -115,8 +117,8 @@ class World {
   checkCollisions() {
     this.level.lowEnemy.forEach((enemy) => {
       enemy.adjustHitbox();
-    if (enemy.hitbox && this.character.isColliding(enemy)) {
-        console.log(this.hitbox.x)
+      let isJumpingOnChicken = this.character.isJumpingOnChicken(this.character, enemy);
+    if (enemy.hitbox && this.character.isColliding(enemy) && !isJumpingOnChicken) {
         this.character.hit();
         this.statusbar.setPercentage(this.character.energy);
         this.character.coin -= 10;

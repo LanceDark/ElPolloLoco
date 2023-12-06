@@ -27,7 +27,7 @@ class LowEnemy extends MoveableObject {
   adjustHitbox() {
     this.hitbox = {
       x: this.x + 0,
-      y: this.y + 20,
+      y: this.y + 10,
       width: this.width + 0,
       height: this.height - 20,
     };
