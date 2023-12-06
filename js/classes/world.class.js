@@ -53,7 +53,7 @@ class World {
     }
   }
 
-  checkEndbossHealth(){
+  checkEndbossHealth() {
     this.endboss[0].checkBossHp();
   }
 
@@ -102,7 +102,7 @@ class World {
     this.level.lowEnemy.forEach((lowEnemy) => {
       this.character.adjustHitbox();
       lowEnemy.adjustHitbox();
-       if (this.character.isJumpingOnChicken(this.character, lowEnemy)) {
+      if (this.character.isJumpingOnChicken(this.character, lowEnemy)) {
         lowEnemy.updateImage(
           "./img/3_enemies_chicken/chicken_normal/2_dead/dead.png"
         );
@@ -115,14 +115,22 @@ class World {
   }
 
   checkCollisions() {
-    this.level.lowEnemy.forEach((enemy) => {
-      enemy.adjustHitbox();
-      let isJumpingOnChicken = this.character.isJumpingOnChicken(this.character, enemy);
-    if (enemy.hitbox && this.character.isColliding(enemy) && !isJumpingOnChicken) {
+    this.level.lowEnemy.forEach((lowEnemy) => {
+      lowEnemy.adjustHitbox();
+      let isJumpingOnChicken = this.character.isJumpingOnChicken(
+        this.character,
+        lowEnemy
+      );
+      if (
+        lowEnemy.hitbox &&
+        this.character.isColliding(lowEnemy) &&
+        !isJumpingOnChicken
+      ) {
         this.character.hit();
         this.statusbar.setPercentage(this.character.energy);
         this.character.coin -= 10;
         this.coinbar.coinReduce(this.character.coin);
+        console.log("wurde ausgeführt");
       }
     });
   }

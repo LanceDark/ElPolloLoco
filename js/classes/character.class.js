@@ -110,7 +110,9 @@ class Character extends MoveableObject {
       if (this.world.keyboard.LEFT && this.x > -200) {
         this.moveLeft();
         this.otherDirection = true;
+        if (!isMuted){
         this.walking_sound.play();
+        }
         this.adjustHitbox();
       }
 

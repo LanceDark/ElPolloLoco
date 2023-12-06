@@ -22,6 +22,7 @@ class LowEnemy extends MoveableObject {
     this.speed = 0.15 + Math.random() * 0.25;
     this.animateChicken();
     this.imageUrl = imageUrl;
+    this.hitbox = this.adjustHitbox();
   }
 
   adjustHitbox() {

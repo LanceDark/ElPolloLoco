@@ -36,15 +36,18 @@ class MoveableObject extends DrawableObject {
       );
     }
   }
+
   isJumpingOnChicken(MoveableObject, lowEnemy) {
-    const tolerance = 20; // Ändere diese Zahl je nach Bedarf
-    return (
-      MoveableObject.hitbox.y <= lowEnemy.hitbox.y + lowEnemy.hitbox.height &&
-      MoveableObject.hitbox.y + MoveableObject.hitbox.height + tolerance >= lowEnemy.hitbox.y &&
+    const tolerance = 20;
+    const isAbove = MoveableObject.hitbox.y + MoveableObject.hitbox.height + tolerance <= lowEnemy.hitbox.y;
+    const isWithinHorizontalRange =
       MoveableObject.hitbox.x + MoveableObject.hitbox.width > lowEnemy.hitbox.x &&
-      MoveableObject.hitbox.x < lowEnemy.hitbox.x + lowEnemy.hitbox.width
-    );
+      MoveableObject.hitbox.x < lowEnemy.hitbox.x + lowEnemy.hitbox.width;
+  
+    return isAbove && isWithinHorizontalRange;
   }
+  
+  
 
   playAnimation(images) {
     let i = this.currentImage % images.length; // let i = 0 % 6; % = Mathematischer Rest. Resetted den Rest Wert auf 0. - 0,1,2,3,4,5, 0!!!

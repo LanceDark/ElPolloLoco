@@ -16,7 +16,17 @@ class Coin extends MoveableObject {
   animateCoins(){
     setInterval(() =>{
       this.playAnimation(this.IMAGES_COINS);
+      this.adjustHitbox();
     }, 200)
+  }
+
+  adjustHitbox() {
+    this.hitbox = {
+      x: this.x,
+      y: this.y,
+      width: this.width,
+      height: this.height,
+    };
   }
 
   isCollectedBy(character) {
