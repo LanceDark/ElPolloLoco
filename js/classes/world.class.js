@@ -17,6 +17,7 @@ class World {
   canvas;
   keyboard;
   camera_x = 0;
+  checkIntervalle = false;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -25,10 +26,11 @@ class World {
     this.draw();
     this.setWorld();
     this.run();
+    this.checkIntervalle = false;
   }
 
   run() {
-    setInterval(() => {
+    this.checkIntervalle = setInterval(() => {
       this.checkEndbossHealth();
       this.checkBossCollision();
       this.checkHealth();
@@ -99,17 +101,23 @@ class World {
   }
 
   checkJumpOnEnemy() {
-    this.level.lowEnemy.forEach((lowEnemy) => {
+    let allEnemies = this.level.lowEnemy.concat(this.level.miniChicken);
+  
+    allEnemies.forEach((enemy) => {
       this.character.adjustHitbox();
-      lowEnemy.adjustHitbox();
-      if (this.character.isJumpingOnChicken(this.character, lowEnemy)) {
-        lowEnemy.updateImage(
-          "./img/3_enemies_chicken/chicken_normal/2_dead/dead.png"
-        );
-        lowEnemy.removeChicken();
+  
+      if (enemy && !enemy.isDead && this.character.isJumpingOnChicken(this.character, enemy)) {
+        if (enemy instanceof miniChicken) {
+          enemy.updateImage("./img/3_enemies_chicken/chicken_small/2_dead/dead.png");
+        } else if (enemy instanceof LowEnemy) {
+          enemy.updateImage("./img/3_enemies_chicken/chicken_normal/2_dead/dead.png");
+        }
+  
+        enemy.removeChicken();
       }
-      if (lowEnemy.isDead) {
-        lowEnemy.hitbox.y += lowEnemy.speed; // Bewege nur "tote" Hühner nach unten
+  
+      if (enemy && enemy.isDead) {
+        enemy.hitbox.y += enemy.speed;
       }
     });
   }

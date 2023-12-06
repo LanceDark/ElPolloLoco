@@ -8,6 +8,7 @@ let fullScreen = false;
  * starting screen, inits backgroundimg and a button to start the game
  */
 function startScreen() {
+  clearAllIntervals();
   let canvas = document.getElementById("playground");
   let ctx = canvas.getContext("2d");
   let img = new Image();
@@ -28,7 +29,7 @@ function refBack() {
   window.location.href = "index.html";
 }
 
-async function init() {
+function init() {
   canvas = document.getElementById("playground");
   world = new World(canvas, keyboard);
   deleteButton();
