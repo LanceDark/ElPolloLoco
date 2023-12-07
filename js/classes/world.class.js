@@ -87,13 +87,10 @@ class World {
     bottle.splashAnimation();
     this.bossCollision = setTimeout(() => {
       this.removeObject(bottle);
-      this.animateBossAfterGetHit();
     }, 500);
   }
 
-  animateBossAfterGetHit() {
-    this.endboss[0].animateAngryBoss();
-  }
+ 
 
   checkThrowObjects() {
     if (
@@ -238,7 +235,7 @@ class World {
       this.flipImage(moveableObject);
     }
     moveableObject.draw(this.ctx);
-    moveableObject.drawFrame(this.ctx);
+    // moveableObject.drawFrame(this.ctx);
     if (moveableObject.otherDirection) {
       this.flipImageBack(moveableObject);
     }

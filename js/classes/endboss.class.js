@@ -86,7 +86,7 @@ class Endboss extends MoveableObject {
         this.moveLeft();
         this.adjustHitbox();
       }, 1000 / 60);
-    } 
+    } else return;
   }
 
   isCollidingBoss(boss) {
@@ -103,39 +103,49 @@ class Endboss extends MoveableObject {
 
   checkBossHp() {
     if (this.bosshp === 0) {
-      console.log("if wird ausgeführt")
+      console.log("if wird ausgeführt");
       clearInterval(this.angryInterval);
       clearInterval(this.moveInterval);
-      clearInterval(this.angryInterval2)
+      clearInterval(this.angryInterval2);
       clearInterval(this.moveIntervalId);
       this.animateDeadBoss();
     }
   }
 
   animateAngryBoss() {
-    console.log("animateAngryBoss wird aufgerufen");
-    this.angryInterval = setInterval(() => {
-      this.playAnimation(this.IMAGES_ANGRY);
-    }, 600);
+    if (this.bosshp > 0) {
+      this.angryInterval = setInterval(() => {
+        this.playAnimation(this.IMAGES_ANGRY);
+      }, 600);
+    }
   }
 
   animateAngryMoveBoss() {
-    this.angryInterval2 = setInterval(() => {
-      this.playAnimation(this.IMAGES_ANGRY_WALK);
-    }, 400);
+    if (this.bosshp > 0) {
+      this.angryInterval2 = setInterval(() => {
+        this.playAnimation(this.IMAGES_ANGRY_WALK);
+      }, 400);
+    }
   }
 
   animateDeadBoss() {
-    this.playAnimation(this.IMAGES_DEAD);
-    this.y += 100;
-    setTimeout(() =>{
-      gameOverScreen()
-    }, 300)
+    if ((this.bosshp === 0)) {
+      this.updateImage("./img/4_enemie_boss_chicken/5_dead/G24.png")
+      this.playAnimation(this.IMAGES_DEAD);
+      this.y += 100;
+      setTimeout(() => {
+        gameOverScreen();
+      }, 300);
+    }
   }
 
-  enbossMoveBoost(){
+  updateImage(newImageUrl) {
+    console.log(this.imageCache)
+      this.img = this.imageCache[newImageUrl];
+  }
+
+  enbossMoveBoost() {
     this.speed = 1.5;
     this.animateAngryMoveBoss();
   }
-
 }

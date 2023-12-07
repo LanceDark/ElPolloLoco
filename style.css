@@ -93,7 +93,7 @@ p{
     position: absolute;
     transform: translate(-42.3%, -50%);
     text-align: center;
-    width: 720px; /* Breite des Canvas */
+    width: 720px;
     height: 480px; 
     background-size: cover; 
     backdrop-filter: blur(10px);
