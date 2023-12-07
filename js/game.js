@@ -8,7 +8,6 @@ let fullScreen = false;
  * starting screen, inits backgroundimg and a button to start the game
  */
 function startScreen() {
-  clearAllIntervals();
   let canvas = document.getElementById("playground");
   let ctx = canvas.getContext("2d");
   let img = new Image();

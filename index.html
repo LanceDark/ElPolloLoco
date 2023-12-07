@@ -30,7 +30,11 @@
   
   <body onload="startScreen()">
     <h1>El Pollo Locco</h1>
-    <main id="content-main">
+      <div class="game-over-screen" id="game-over-screen">
+        <div class="explain-div">
+          <button onclick="refBack()">Back to Menu</button>
+        </div>
+    </div>
       <canvas width="720" height="480" id="playground">
         <button>Start</button>
       </canvas>
@@ -53,11 +57,7 @@
         </div>
       </section>
 
-      <div class="game-over-screen" id="game-over-screen">
-        <div class="explain-div">
-          <button onclick="refBack()">Back to Menu</button>
-        </div>
-      </div>
+
 
       <div id="menu">
         <button onclick="init()">Start Level</button>

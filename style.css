@@ -86,17 +86,26 @@ p{
 
 .game-over-screen {
     background-image: url('img/9_intro_outro_screens/game_over/game over.png');
-    z-index: 3;
+    background-size: cover; /* Hintergrundbild auf die gesamte Größe des Elements ausdehnen */
+    background-position: center; /* Hintergrundbild zentrieren */
+    position: fixed;
+    top: 8.5%; /* Anpassung auf 0, um von oben zu starten */
+    left: 50%; /* Anpassung auf 50%, um in der Mitte zu starten */
+    transform: translateX(-50%); /* Zentrieren des Elements relativ zu seiner Breite */
+    width: 720px; /* 100% der Viewport-Breite */
+    height: 480px; /* 100% der Viewport-Höhe */
     display: none;
-    top: 34%;
-    left: 45%;
-    position: absolute;
-    transform: translate(-42.3%, -50%);
-    text-align: center;
-    width: 720px;
-    height: 480px; 
-    background-size: cover; 
+    z-index: 3;
     backdrop-filter: blur(10px);
+}
+
+.game-over-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
 }
 
 .option-div {
