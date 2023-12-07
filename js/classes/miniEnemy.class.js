@@ -1,7 +1,7 @@
 class miniChicken extends MoveableObject {
   y = 390;
   height = 50;
-  speed = 0.2;
+  speed = 5;
   isDead = false;
   velocityY = 4;
   IMAGES_WALKING = [

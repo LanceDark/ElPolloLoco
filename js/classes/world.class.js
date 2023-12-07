@@ -34,6 +34,7 @@ class World {
       this.checkEndbossHealth();
       this.checkBossCollision();
       this.checkHealth();
+      this.checkEndbossCollision();
       this.checkCollisions();
       this.checkCollect();
       this.checkThrowObjects();
@@ -55,6 +56,17 @@ class World {
     }
   }
 
+  checkEndbossCollision(){
+     let endboss = this.endboss[0];
+    if(endboss.isColliding(this.character)) {
+      this.character.hit();
+      this.statusbar.setPercentage(this.character.energy);
+      this.character.coin -= 10;
+      this.coinbar.coinReduce(this.character.coin);
+    }
+
+  }
+
   checkEndbossHealth() {
     this.endboss[0].checkBossHp();
   }
@@ -65,6 +77,7 @@ class World {
       this.handleAnimation(bottle);
       this.endbossbar.endbossHit(20);
       this.endboss[0].endbossHitDamage(20);
+      this.endboss[0].enbossMoveBoost();
       this.endbossbar.setPercentage(this.endbossbar.bosshp);
     }
   }
@@ -101,21 +114,17 @@ class World {
   }
 
   checkJumpOnEnemy() {
-    let allEnemies = this.level.lowEnemy.concat(this.level.miniChicken);
-  
+    let allEnemies = this.level.lowEnemy.concat(this.level.miniChicken); 
     allEnemies.forEach((enemy) => {
       this.character.adjustHitbox();
-  
       if (enemy && !enemy.isDead && this.character.isJumpingOnChicken(this.character, enemy)) {
         if (enemy instanceof miniChicken) {
           enemy.updateImage("./img/3_enemies_chicken/chicken_small/2_dead/dead.png");
         } else if (enemy instanceof LowEnemy) {
           enemy.updateImage("./img/3_enemies_chicken/chicken_normal/2_dead/dead.png");
         }
-  
         enemy.removeChicken();
       }
-  
       if (enemy && enemy.isDead) {
         enemy.hitbox.y += enemy.speed;
       }

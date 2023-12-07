@@ -133,4 +133,9 @@ class Endboss extends MoveableObject {
     }, 300)
   }
 
+  enbossMoveBoost(){
+    this.speed = 1.5;
+    this.animateAngryMoveBoss();
+  }
+
 }
