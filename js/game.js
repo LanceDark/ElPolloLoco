@@ -46,8 +46,8 @@ function deleteButton() {
 }
 
 function openSettings() {
-  let content = document.getElementById('story-container')
-  content.style.display = "flex"
+  let contents = document.getElementById('story-container')
+  contents.style.display = "flex"
   getNewBackground();
   deleteButton();
   openSetting();
@@ -103,13 +103,13 @@ function fullscreen() {
   fullscreenDiv.innerHTML = '';
 
   if (!fullScreen) {
-    fullscreenDiv.innerHTML += 'Vollbild'
+    fullscreenDiv.innerHTML += 'Fullscreen'
     canvas.style.width = "100%";
     canvas.style.height = "100%";
     applyFullscreen(content);
     fullScreen = true;
   } else {
-    fullscreenDiv.innerHTML += 'kein Vollbild'
+    fullscreenDiv.innerHTML += 'No Fullscreen'
     canvas.style.width = "720px";
     canvas.style.height = "480px";
     endFullScreen();
