@@ -46,6 +46,8 @@ function deleteButton() {
 }
 
 function openSettings() {
+  let content = document.getElementById('story-container')
+  content.style.display = "flex"
   getNewBackground();
   deleteButton();
   openSetting();
@@ -69,6 +71,8 @@ function getNewBackground() {
 }
 
 function pepeStory() {
+  let content = document.getElementById('story-container')
+  content.style.display = "flex"
   getNewBackground();
   deleteButton();
   openPepeStory();
@@ -77,6 +81,15 @@ function pepeStory() {
 function openPepeStory() {
   story();
 }
+
+function openLevelSelect(){
+  let content = document.getElementById('story-container')
+  content.style.display = "flex"
+  getNewBackground();
+  deleteButton();
+  openLevel();
+}
+
 
 function gameOverScreen() {
   let end = document.getElementById("game-over-screen");
