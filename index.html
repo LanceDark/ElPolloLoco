@@ -32,7 +32,7 @@
 
   <body onload="startScreen()">
     <h1>El Pollo Locco</h1>
-    <section class="content">
+    <section class="content" id="content">
       <div class="game-over-screen" id="game-over-screen">
         <div class="explain-div">
           <button onclick="refBack()">Back to Menu</button>
@@ -57,6 +57,10 @@
           <img id="jumpMove" src="./img/touchPanels/up-arrow.png" alt="" class="panel-images"/>
           <img id="throwMove" src="./img/touchPanels/game.png" alt="" class="panel-images"/>
         </div>
+      </div>
+      <div class="change-screen" id="changeScreen">
+        <img src="./img/screen-rotate.png" alt="" class="rotate-screen">
+        Please rotate your screen.
       </div>
     </section>
 

@@ -3,15 +3,25 @@ let world;
 let keyboard = new Keyboard();
 let isMuted = false;
 let fullScreen = false;
-let backgroundMusic = new Audio("./music/background-music.mp3")
+let backgroundMusic = new Audio("./music/background-music.mp3");
+window.addEventListener("resize", handleResize);
+window.onload = function () {
+  checkSize();
+  handleResize(); // Führe die Funktion einmal beim Laden aus
+};
+
+let mediaQuery = window.matchMedia(
+  "(min-width: 720px) and (min-height: 580px)"
+);
+mediaQuery.addEventListener("change", handleMediaQueryChange);
 
 /**
  * starting screen, inits backgroundimg and a button to start the game
  */
 function startScreen() {
   backgroundMusic.play();
-  let canvas = document.getElementById("playground");
-  let ctx = canvas.getContext("2d");
+  let localCanvas = document.getElementById("playground");
+  let ctx = localCanvas.getContext("2d");
   let img = new Image();
   img.src = "./img/9_intro_outro_screens/start/startscreen_1.png";
 
@@ -49,8 +59,8 @@ function deleteButton() {
 }
 
 function openSettings() {
-  let contents = document.getElementById('story-container')
-  contents.style.display = "flex"
+  let contents = document.getElementById("story-container");
+  contents.style.display = "flex";
   getNewBackground();
   deleteButton();
   openSetting();
@@ -74,8 +84,8 @@ function getNewBackground() {
 }
 
 function pepeStory() {
-  let content = document.getElementById('story-container')
-  content.style.display = "flex"
+  let content = document.getElementById("story-container");
+  content.style.display = "flex";
   getNewBackground();
   deleteButton();
   openPepeStory();
@@ -85,14 +95,13 @@ function openPepeStory() {
   story();
 }
 
-function openLevelSelect(){
-  let content = document.getElementById('story-container')
-  content.style.display = "flex"
+function openLevelSelect() {
+  let content = document.getElementById("story-container");
+  content.style.display = "flex";
   getNewBackground();
   deleteButton();
   openLevel();
 }
-
 
 function gameOverScreen() {
   let end = document.getElementById("game-over-screen");
@@ -100,19 +109,19 @@ function gameOverScreen() {
 }
 
 function fullscreen() {
-  let content = document.getElementById("content-main");
+  let content = document.getElementById("content");
   let canvas = document.getElementById("playground");
-  let fullscreenDiv = document.getElementById('fullScreen');
-  fullscreenDiv.innerHTML = '';
+  let fullscreenDiv = document.getElementById("fullScreen");
+  fullscreenDiv.innerHTML = "";
 
   if (!fullScreen) {
-    fullscreenDiv.innerHTML += 'Fullscreen'
+    fullscreenDiv.innerHTML += "Fullscreen";
     canvas.style.width = "100%";
     canvas.style.height = "100%";
     applyFullscreen(content);
     fullScreen = true;
   } else {
-    fullscreenDiv.innerHTML += 'No Fullscreen'
+    fullscreenDiv.innerHTML += "No Fullscreen";
     canvas.style.width = "720px";
     canvas.style.height = "480px";
     endFullScreen();
@@ -131,26 +140,57 @@ function applyFullscreen(element) {
 }
 
 function endFullScreen() {
-  if(document.exitFullscreen) {
+  if (document.exitFullscreen) {
     document.exitFullscreen();
-  } else if(document.webkitExitFullscreen) {
+  } else if (document.webkitExitFullscreen) {
     document.webkitExitFullscreen();
   }
 }
 
 function musicToggle() {
-  let soundButton = document.getElementById('soundButton');
-  soundButton.innerHTML = '';
+  let soundButton = document.getElementById("soundButton");
+  soundButton.innerHTML = "";
   if (isMuted) {
     isMuted = false;
-    soundButton.innerHTML += `Ton An`;
+    soundButton.innerHTML += `Sound On`;
   } else {
-    soundButton.innerHTML += `Ton Aus`;
+    soundButton.innerHTML += `Sound Off`;
     isMuted = true;
     document.querySelectorAll("audio").forEach(function (audioElement) {
       audioElement.muted = isMuted;
     });
   }
+}
+
+function checkSize() {
+  let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+  let height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+  let screenChange = document.getElementById('changeScreen');
+
+  if (width >= 720 && height >= 580) {
+    screenChange.style.display = 'none';
+  } else {
+    screenChange.style.display = 'flex';
+  }
+}
+
+function handleResize() {
+  checkSize();
+  let screenChange = document.getElementById('changeScreen');
+  let touchPanels = document.getElementById('touchPanels');
+
+  if (mediaQuery.matches) {
+    screenChange.style.display = 'none';
+    touchPanels.style.display = 'none';
+  } else {
+    screenChange.style.display = 'flex';
+    touchPanels.style.display = 'flex';
+  }
+}
+
+function handleMediaQueryChange() {
+  console.log('used')
+  handleResize();
 }
 
 window.addEventListener("keydown", (e) => {

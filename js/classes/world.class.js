@@ -94,8 +94,6 @@ class World {
     }, 500);
   }
 
- 
-
   checkThrowObjects() {
     if (
       this.keyboard.D &&
@@ -242,7 +240,7 @@ class World {
       this.flipImage(moveableObject);
     }
     moveableObject.draw(this.ctx);
-    // moveableObject.drawFrame(this.ctx);
+    moveableObject.drawFrame(this.ctx);
     if (moveableObject.otherDirection) {
       this.flipImageBack(moveableObject);
     }
