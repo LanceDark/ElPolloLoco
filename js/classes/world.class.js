@@ -18,6 +18,9 @@ class World {
   keyboard;
   camera_x = 0;
   checkIntervalle = false;
+  bottleHitBossSound = new Audio("./music/bottleexplode.wav");
+  jumpSound = new Audio("./music/jump_player.wav");
+  coinMusic = new Audio("./music/coin_player.wav");
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -79,6 +82,7 @@ class World {
       this.endboss[0].endbossHitDamage(20);
       this.endboss[0].enbossMoveBoost();
       this.endbossbar.setPercentage(this.endbossbar.bosshp);
+      this.bottleHitBossSound.play();
     }
   }
 
@@ -116,9 +120,11 @@ class World {
       this.character.adjustHitbox();
       if (enemy && !enemy.isDead && this.character.isJumpingOnChicken(this.character, enemy)) {
         if (enemy instanceof miniChicken) {
+          this.jumpSound.play();
           enemy.updateImage("./img/3_enemies_chicken/chicken_small/2_dead/dead.png");
         } else if (enemy instanceof LowEnemy) {
           enemy.updateImage("./img/3_enemies_chicken/chicken_normal/2_dead/dead.png");
+          this.jumpSound.play();
         }
         enemy.removeChicken();
       }
@@ -154,6 +160,7 @@ class World {
       if (coin.isCollectedBy(this.character) && this.character.coin < 100) {
         this.character.coinCollect();
         this.coinbar.earnCoin(this.character.coin);
+        this.coinMusic.play();
         let i = this.level.coin.indexOf(coin);
         if (i !== 1) {
           this.level.coin.splice(i, 1);

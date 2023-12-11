@@ -43,6 +43,7 @@ class Endboss extends MoveableObject {
   angryInterval;
   bosshp = 100;
   moveInterval;
+  deadBoss = new Audio("./music/win_player.wav")
 
   constructor() {
     super().loadImage("./img/4_enemie_boss_chicken/2_alert/G5.png");
@@ -109,6 +110,7 @@ class Endboss extends MoveableObject {
       clearInterval(this.angryInterval2);
       clearInterval(this.moveIntervalId);
       this.animateDeadBoss();
+      this.deadBoss.play();
     }
   }
 

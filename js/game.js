@@ -3,11 +3,13 @@ let world;
 let keyboard = new Keyboard();
 let isMuted = false;
 let fullScreen = false;
+let backgroundMusic = new Audio("./music/background-music.mp3")
 
 /**
  * starting screen, inits backgroundimg and a button to start the game
  */
 function startScreen() {
+  backgroundMusic.play();
   let canvas = document.getElementById("playground");
   let ctx = canvas.getContext("2d");
   let img = new Image();

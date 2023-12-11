@@ -67,6 +67,7 @@ class Character extends MoveableObject {
   currentImage = 0;
   world;
   walking_sound = new Audio("./music/Walking.mp3");
+  gameover_sound = new Audio("./music/lost_player.wav")
   hitboxOffsetX = 10;
   hitboxOffesetY = 110;
   hitboxOffsetWidth = 20;
@@ -128,6 +129,7 @@ class Character extends MoveableObject {
       if (this.isDead()) {
         this.deadAnimation = 0;
           this.pepeDead();
+          this.gameover_sound.play();
       } else if (this.isHurt()) {
         this.idleTimeout = 0;
         this.playAnimation(this.IMAGES_HURT);
