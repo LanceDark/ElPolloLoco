@@ -16,6 +16,7 @@ body {
 
 canvas {
     background-color: black;
+    display: block;
 }
 
 h1{
@@ -28,6 +29,10 @@ h1{
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
 }
 
 button {
@@ -48,15 +53,9 @@ button:hover {
 
 #story-container {
     position: absolute;
-    top: 33%;
-    left: 50%;
-    margin-top: 38px;
-    transform: translate(-50%, -50%);
     text-align: center;
-    width: 720px;
-    max-width: 720px;
-    height: 480px;
-    max-height: 480px;
+    width: 100%;
+    height: 100%;
     display: none;
     flex-direction: column;
     align-items: center;
@@ -69,6 +68,14 @@ button:hover {
     margin-left: 100px;
     margin-right: 100px;
     margin-bottom: 20px;
+    font-size: 15px;
+}
+
+.content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
 .return-button{
@@ -111,14 +118,11 @@ p{
 
 .game-over-screen {
     background-image: url('img/9_intro_outro_screens/game_over/game over.png');
-    background-size: cover; /* Hintergrundbild auf die gesamte Größe des Elements ausdehnen */
-    background-position: center; /* Hintergrundbild zentrieren */
-    position: fixed;
-    top: 8.5%; /* Anpassung auf 0, um von oben zu starten */
-    left: 50%; /* Anpassung auf 50%, um in der Mitte zu starten */
-    transform: translateX(-50%); /* Zentrieren des Elements relativ zu seiner Breite */
-    width: 720px; /* 100% der Viewport-Breite */
-    height: 480px; /* 100% der Viewport-Höhe */
+    background-size: cover;
+    background-position: center; 
+    position: absolute;
+    width: 100%; 
+    height: 100%; 
     display: none;
     z-index: 3;
     backdrop-filter: blur(10px);
@@ -191,4 +195,29 @@ p{
     align-items: center;
     width: 300px;
     padding-top: 90px;
+}
+
+
+@media only screen and (max-width: 720px) {
+    canvas {
+        width: 100%
+    }
+}
+
+@media only screen and (max-height: 480px) {
+    canvas{
+        height: 100%;
+    } 
+
+    h1 {
+        display: none;
+    }
+
+    .description-div {
+        display: none;
+    }
+}
+
+@media (max-width: 570px){
+    .turn-phone-div{}
 }
