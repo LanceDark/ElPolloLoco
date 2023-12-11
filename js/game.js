@@ -29,6 +29,7 @@ function refBack() {
 }
 
 function init() {
+  initLevel();
   canvas = document.getElementById("playground");
   world = new World(canvas, keyboard);
   deleteButton();
