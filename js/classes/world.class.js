@@ -17,7 +17,7 @@ class World {
   canvas;
   keyboard;
   camera_x = 0;
-  checkIntervalle = false;
+  isAbove = false;
   bottleHitBossSound = new Audio("./music/bottleexplode.wav");
   jumpSound = new Audio("./music/jump_player.wav");
   coinMusic = new Audio("./music/coin_player.wav");
@@ -29,21 +29,23 @@ class World {
     this.draw();
     this.setWorld();
     this.run();
-    this.checkIntervalle = false;
   }
 
   run() {
-    this.checkIntervalle = setInterval(() => {
+    setInterval(() => {
       this.checkEndbossHealth();
       this.checkBossCollision();
       this.checkHealth();
       this.checkEndbossCollision();
-      this.checkCollisions();
+
       this.checkCollect();
       this.checkThrowObjects();
       this.checkBottleCollect();
-      this.checkJumpOnEnemy();
     }, 250);
+
+    setInterval(() =>{
+      this.checkCollisions();
+    }, 20);
   }
 
   checkBossCollision() {
@@ -59,15 +61,14 @@ class World {
     }
   }
 
-  checkEndbossCollision(){
-     let endboss = this.endboss[0];
-    if(endboss.isColliding(this.character)) {
+  checkEndbossCollision() {
+    let endboss = this.endboss[0];
+    if (endboss.isColliding(this.character)) {
       this.character.hit();
       this.statusbar.setPercentage(this.character.energy);
       this.character.coin -= 10;
       this.coinbar.coinReduce(this.character.coin);
     }
-
   }
 
   checkEndbossHealth() {
@@ -101,7 +102,6 @@ class World {
       !this.character.isAboveGround()
     ) {
       if (!this.throwableObject) {
-        console.error("throwableObject ist nicht definiert!");
         return;
       }
       let bottle = new Bottle(this.character.x + 100, this.character.y + 100);
@@ -112,45 +112,41 @@ class World {
     }
   }
 
-  checkJumpOnEnemy() {
-    let allEnemies = this.level.lowEnemy.concat(this.level.miniChicken); 
-    allEnemies.forEach((enemy) => {
-      this.character.adjustHitbox();
-      if (enemy && !enemy.isDead && this.character.isJumpingOnChicken(this.character, enemy)) {
-        if (enemy instanceof miniChicken) {
-          this.jumpSound.play();
-          enemy.updateImage("./img/3_enemies_chicken/chicken_small/2_dead/dead.png");
-        } else if (enemy instanceof LowEnemy) {
-          enemy.updateImage("./img/3_enemies_chicken/chicken_normal/2_dead/dead.png");
-          this.jumpSound.play();
+  checkCollisions() {
+    this.level.lowEnemy.forEach((enemy) => {
+      if (this.character.isColliding(enemy)) {
+        if (this.playerIsAboveGround()) {
+          this.handleJumpOnEnemy(enemy);
+        } else if (!enemy.isDead && !this.playerIsAboveGround()) {
+          this.character.hit();
+          this.statusbar.setPercentage(this.character.energy);
+          this.character.coin -= 10;
+          this.coinbar.coinReduce(this.character.coin);
         }
-        enemy.removeChicken();
-      }
-      if (enemy && enemy.isDead) {
-        enemy.hitbox.y += enemy.speed;
       }
     });
   }
 
-  checkCollisions() {
-    this.level.lowEnemy.forEach((lowEnemy) => {
-      lowEnemy.adjustHitbox();
-      let isJumpingOnChicken = this.character.isJumpingOnChicken(
-        this.character,
-        lowEnemy
-      );
-      if (
-        lowEnemy.hitbox &&
-        this.character.isColliding(lowEnemy) &&
-        !isJumpingOnChicken
-      ) {
-        this.character.hit();
-        this.statusbar.setPercentage(this.character.energy);
-        this.character.coin -= 10;
-        this.coinbar.coinReduce(this.character.coin);
-        console.log("wurde ausgeführt");
-      }
-    });
+  handleJumpOnEnemy(enemy) {
+    console.log("if ausgeführt");
+    if (enemy instanceof miniChicken) {
+        this.jumpSound.play();
+        enemy.updateImage(
+            "./img/3_enemies_chicken/chicken_small/2_dead/dead.png"
+        );
+        enemy.removeChicken();
+    } else if (enemy instanceof LowEnemy) {
+        console.log("LowEnemy branch executed");
+        enemy.updateImage(
+            "./img/3_enemies_chicken/chicken_normal/2_dead/dead.png"
+        );
+        enemy.removeChicken();
+    }
+}
+
+
+  playerIsAboveGround() {
+    return this.character.isAboveGround();
   }
 
   checkCollect() {
