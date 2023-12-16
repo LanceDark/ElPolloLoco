@@ -102,6 +102,7 @@ function gameOverScreen() {
 function fullscreen() {
   let content = document.getElementById("content");
   let canvas = document.getElementById("playground");
+  let helper = document.getElementById("changeScreen");
   let fullscreenDiv = document.getElementById("fullScreen");
   fullscreenDiv.innerHTML = "";
 
@@ -109,6 +110,7 @@ function fullscreen() {
     fullscreenDiv.innerHTML += "Fullscreen";
     canvas.style.width = "100%";
     canvas.style.height = "100%";
+    helper.style.display = "none";
     applyFullscreen(content);
     fullScreen = true;
   } else {

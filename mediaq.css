@@ -29,6 +29,18 @@
     }
 }
 
+@media (max-height: 600px) {
+    h1 {
+        display: none;
+    }
+}
+
+@media (max-width: 560px) {
+    button {
+        font-size: 10px
+    }
+}
+
 @media only screen and (orientation: portrait) and (max-width: 600px) {
     .change-screen {
         display: flex;
@@ -39,17 +51,5 @@
         right: 0;
         z-index: 999;
         background-color: rgba(0, 0, 0, 0.5);
-    }
-}
-
-@media only screen and (max-width: 720px) {
-    canvas {
-        width: 100%;
-    }
-}
-
-@media only screen and (max-height: 480px) {
-    canvas {
-        height: 100vh;
     }
 }
