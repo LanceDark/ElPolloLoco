@@ -4,16 +4,6 @@ let keyboard = new Keyboard();
 let isMuted = false;
 let fullScreen = false;
 let backgroundMusic = new Audio("./music/background-music.mp3");
-window.addEventListener("resize", handleResize);
-window.onload = function () {
-  checkSize();
-  handleResize(); // Führe die Funktion einmal beim Laden aus
-};
-
-let mediaQuery = window.matchMedia(
-  "(min-width: 720px) and (min-height: 580px)"
-);
-mediaQuery.addEventListener("change", handleMediaQueryChange);
 
 /**
  * starting screen, inits backgroundimg and a button to start the game
@@ -46,6 +36,7 @@ function init() {
   world = new World(canvas, keyboard);
   deleteButton();
   deleteStory();
+  rotateMessage()
 }
 
 function deleteStory() {
@@ -162,36 +153,16 @@ function musicToggle() {
   }
 }
 
-function checkSize() {
-  let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-  let height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-  let screenChange = document.getElementById('changeScreen');
-
-  if (width >= 720 && height >= 580) {
-    screenChange.style.display = 'none';
-  } else {
-    screenChange.style.display = 'flex';
-  }
+function rotateMessage() {
+  window.addEventListener("orientationchange", function () {
+      if (window.matchMedia("(orientation: portrait)").matches) {
+          document.getElementById("changeScreen").style.display = "block";
+      } else {
+          document.getElementById("changeScreen").style.display = "none";
+      }
+  });
 }
 
-function handleResize() {
-  checkSize();
-  let screenChange = document.getElementById('changeScreen');
-  let touchPanels = document.getElementById('touchPanels');
-
-  if (mediaQuery.matches) {
-    screenChange.style.display = 'none';
-    touchPanels.style.display = 'none';
-  } else {
-    screenChange.style.display = 'flex';
-    touchPanels.style.display = 'flex';
-  }
-}
-
-function handleMediaQueryChange() {
-  console.log('used')
-  handleResize();
-}
 
 window.addEventListener("keydown", (e) => {
   if (e.keyCode == 39) {
