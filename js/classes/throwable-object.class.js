@@ -72,7 +72,6 @@ class ThrowableObject extends MoveableObject {
       return;
     }
   }
-  
 
   applyGravityForBottle() {
     if (!(this.y >= 350) && !this.bottleIsCollidingBoss) {

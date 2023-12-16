@@ -128,7 +128,6 @@ class World {
   }
 
   handleJumpOnEnemy(enemy) {
-    console.log("if ausgeführt");
     if (enemy instanceof miniChicken) {
       let jumpSound = new Audio("./music/jump_player.wav");
       jumpSound.addEventListener("canplaythrough", () => {
@@ -176,7 +175,6 @@ class World {
       if (bottle.isCollectedBy(this.character) && this.character.bottle < 100) {
         this.character.bottleCollect();
         this.bottlebar.earnBottle(this.character.bottle);
-        console.log("bla" + this.character.bottle);
         let index = this.level.bottle.indexOf(bottle);
         if (index !== 1) {
           this.level.bottle.splice(index, 1);
@@ -204,7 +202,7 @@ class World {
   }
 
   endAnimations() {
-      for (let i = 1; i < 9999; i++) window.clearInterval(i);
+    for (let i = 1; i < 9999; i++) window.clearInterval(i);
   }
 
   draw() {
@@ -249,7 +247,7 @@ class World {
       this.flipImage(moveableObject);
     }
     moveableObject.draw(this.ctx);
-    moveableObject.drawFrame(this.ctx);
+    //moveableObject.drawFrame(this.ctx);
     if (moveableObject.otherDirection) {
       this.flipImageBack(moveableObject);
     }

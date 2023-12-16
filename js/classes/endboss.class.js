@@ -43,7 +43,7 @@ class Endboss extends MoveableObject {
   angryInterval;
   bosshp = 100;
   moveInterval;
-  deadBoss = new Audio("./music/win_player.wav")
+  deadBoss = new Audio("./music/win_player.wav");
   deadBossPlayed = false;
 
   constructor() {
@@ -106,16 +106,18 @@ class Endboss extends MoveableObject {
 
   checkBossHp() {
     if (this.bosshp === 0) {
-      console.log("if wird ausgeführt");
       clearInterval(this.angryInterval);
       clearInterval(this.moveInterval);
       clearInterval(this.angryInterval2);
       clearInterval(this.moveIntervalId);
       this.animateDeadBoss();
-      if(this.deadBossPlayed === false){
+      if (this.deadBossPlayed === false) {
         this.deadBoss.play();
       }
       this.deadBossPlayed = true;
+      setTimeout(() => {
+        world.endAnimations();
+      }, 900);
     }
   }
 
@@ -136,8 +138,8 @@ class Endboss extends MoveableObject {
   }
 
   animateDeadBoss() {
-    if ((this.bosshp === 0)) {
-      this.updateImage("./img/4_enemie_boss_chicken/5_dead/G24.png")
+    if (this.bosshp === 0) {
+      this.updateImage("./img/4_enemie_boss_chicken/5_dead/G24.png");
       this.playAnimation(this.IMAGES_DEAD);
       this.y += 100;
       setTimeout(() => {
@@ -147,8 +149,7 @@ class Endboss extends MoveableObject {
   }
 
   updateImage(newImageUrl) {
-    console.log(this.imageCache)
-      this.img = this.imageCache[newImageUrl];
+    this.img = this.imageCache[newImageUrl];
   }
 
   enbossMoveBoost() {

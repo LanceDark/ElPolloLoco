@@ -41,7 +41,6 @@ class Bottle extends ThrowableObject {
   }
 
   splashAnimation() {
-    console.log("Splash Animation wird abgespielt");
     this.playAnimation(this.IMAGES_SPLASH);
     setTimeout(() =>{
       this.isPlayingAnimation = false;
