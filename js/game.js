@@ -4,12 +4,22 @@ let keyboard = new Keyboard();
 let isMuted = false;
 let fullScreen = false;
 let backgroundMusic = new Audio("./music/background-music.mp3");
+backgroundMusic.muted = true;
+backgroundMusic.volume = 0.1;
+
+
+function startBackgroundMusic() {
+  backgroundMusic.muted = false;
+  backgroundMusic.play();
+}
+
+// Event-Listener, der die Funktion beim Laden der Seite aufruft
+document.addEventListener('DOMContentLoaded', startBackgroundMusic);
 
 /**
  * starting screen, inits backgroundimg and a button to start the game
  */
 function startScreen() {
-  backgroundMusic.play();
   let localCanvas = document.getElementById("playground");
   let ctx = localCanvas.getContext("2d");
   let img = new Image();
@@ -36,7 +46,7 @@ function init() {
   world = new World(canvas, keyboard);
   deleteButton();
   deleteStory();
-  rotateMessage()
+  turnScreen()
 }
 
 function deleteStory() {
@@ -146,21 +156,23 @@ function musicToggle() {
   if (isMuted) {
     isMuted = false;
     soundButton.innerHTML += `Sound On`;
+    backgroundMusic.muted = false;
   } else {
     soundButton.innerHTML += `Sound Off`;
     isMuted = true;
+    backgroundMusic.muted = true;
     document.querySelectorAll("audio").forEach(function (audioElement) {
       audioElement.muted = isMuted;
     });
   }
 }
 
-function rotateMessage() {
+function turnScreen() {
   window.addEventListener("orientationchange", function () {
       if (window.matchMedia("(orientation: portrait)").matches) {
-          document.getElementById("changeScreen").style.display = "block";
+          document.getElementById("changeScreen").style.display = "flex";
       } else {
-          document.getElementById("changeScreen").style.display = "none";
+          document.getElementById("changeScreen").style.display = "none";        
       }
   });
 }

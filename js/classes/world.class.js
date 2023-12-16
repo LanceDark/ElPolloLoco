@@ -18,9 +18,6 @@ class World {
   keyboard;
   camera_x = 0;
   isAbove = false;
-  bottleHitBossSound = new Audio("./music/bottleexplode.wav");
-  jumpSound = new Audio("./music/jump_player.wav");
-  coinMusic = new Audio("./music/coin_player.wav");
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -35,15 +32,15 @@ class World {
     setInterval(() => {
       this.checkEndbossHealth();
       this.checkBossCollision();
-      this.checkHealth();
       this.checkEndbossCollision();
-      this.checkCollect();
       this.checkThrowObjects();
-      this.checkBottleCollect();
     }, 250);
 
-    setInterval(() =>{
+    setInterval(() => {
       this.checkCollisions();
+      this.checkHealth();
+      this.checkCollect();
+      this.checkBottleCollect();
     }, 20);
   }
 
@@ -82,7 +79,11 @@ class World {
       this.endboss[0].endbossHitDamage(20);
       this.endboss[0].enbossMoveBoost();
       this.endbossbar.setPercentage(this.endbossbar.bosshp);
-      this.bottleHitBossSound.play();
+      let bottleHitBossSound = new Audio("./music/bottleexplode.wav");
+      bottleHitBossSound.addEventListener("canplaythrough", () => {
+        bottleHitBossSound.play();
+      });
+      bottleHitBossSound.play();
     }
   }
 
@@ -129,35 +130,43 @@ class World {
   handleJumpOnEnemy(enemy) {
     console.log("if ausgeführt");
     if (enemy instanceof miniChicken) {
-        this.jumpSound.play();
-        enemy.updateImage(
-            "./img/3_enemies_chicken/chicken_small/2_dead/dead.png"
-        );
-        enemy.removeChicken();
+      let jumpSound = new Audio("./music/jump_player.wav");
+      jumpSound.addEventListener("canplaythrough", () => {
+        jumpSound.play();
+      });
+      jumpSound.play();
+      enemy.updateImage(
+        "./img/3_enemies_chicken/chicken_small/2_dead/dead.png"
+      );
+      enemy.removeChicken();
     } else if (enemy instanceof LowEnemy) {
-        console.log("LowEnemy branch executed");
-        enemy.updateImage(
-            "./img/3_enemies_chicken/chicken_normal/2_dead/dead.png"
-        );
-        enemy.removeChicken();
+      let jumpSound = new Audio("./music/jump_player.wav");
+      jumpSound.addEventListener("canplaythrough", () => {
+        jumpSound.play();
+      });
+      jumpSound.play();
+      enemy.updateImage(
+        "./img/3_enemies_chicken/chicken_normal/2_dead/dead.png"
+      );
+      enemy.removeChicken();
     }
-}
-
+  }
 
   playerIsAboveGround() {
     return this.character.isAboveGround();
   }
 
   checkCollect() {
-    this.level.coin.forEach((coin) => {
+    this.level.coin.forEach((coin, index) => {
       if (coin.isCollectedBy(this.character) && this.character.coin < 100) {
         this.character.coinCollect();
         this.coinbar.earnCoin(this.character.coin);
-        this.coinMusic.play();
-        let i = this.level.coin.indexOf(coin);
-        if (i !== 1) {
-          this.level.coin.splice(i, 1);
-        }
+        let coinMusic = new Audio("./music/coin_player.wav");
+        coinMusic.addEventListener("canplaythrough", () => {
+          coinMusic.play();
+        });
+        coinMusic.play();
+        this.level.coin.splice(index, 1);
       }
     });
   }
@@ -179,6 +188,7 @@ class World {
   checkHealth() {
     if (this.character.energy <= 0) {
       gameOverScreen();
+      this.endAnimations();
     } else return;
   }
 
@@ -191,6 +201,10 @@ class World {
 
   setWorld() {
     this.character.world = this;
+  }
+
+  endAnimations() {
+      for (let i = 1; i < 9999; i++) window.clearInterval(i);
   }
 
   draw() {

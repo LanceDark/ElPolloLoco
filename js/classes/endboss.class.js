@@ -44,6 +44,7 @@ class Endboss extends MoveableObject {
   bosshp = 100;
   moveInterval;
   deadBoss = new Audio("./music/win_player.wav")
+  deadBossPlayed = false;
 
   constructor() {
     super().loadImage("./img/4_enemie_boss_chicken/2_alert/G5.png");
@@ -58,6 +59,7 @@ class Endboss extends MoveableObject {
     this.bosshp = 100;
     this.angryInterval = null;
     this.moveInterval = null;
+    this.deadBossPlayed = false;
   }
 
   adjustHitbox() {
@@ -110,7 +112,10 @@ class Endboss extends MoveableObject {
       clearInterval(this.angryInterval2);
       clearInterval(this.moveIntervalId);
       this.animateDeadBoss();
-      this.deadBoss.play();
+      if(this.deadBossPlayed === false){
+        this.deadBoss.play();
+      }
+      this.deadBossPlayed = true;
     }
   }
 

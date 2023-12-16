@@ -68,6 +68,7 @@ class Character extends MoveableObject {
   world;
   walking_sound = new Audio("./music/Walking.mp3");
   gameover_sound = new Audio("./music/lost_player.wav")
+  dead = false;
   hitboxOffsetX = 10;
   hitboxOffesetY = 110;
   hitboxOffsetWidth = 20;
@@ -126,10 +127,11 @@ class Character extends MoveableObject {
     }, 1000 / 60);
 
     setInterval(() => {
-      if (this.isDead()) {
+      if (this.isDead() && this.dead === false) {
         this.deadAnimation = 0;
           this.pepeDead();
           this.gameover_sound.play();
+          this.dead = true;
       } else if (this.isHurt()) {
         this.idleTimeout = 0;
         this.playAnimation(this.IMAGES_HURT);
