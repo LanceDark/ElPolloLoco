@@ -82,14 +82,11 @@ button:hover {
 
 .description-div {
   display: flex;
-  height: 60px;
-  flex-direction: row;
-  gap: 20px;
+  flex-direction: column;
+  gap: 10px;
   margin: 10px;
-  width: 350px;
   font-size: 13px;
   border-radius: 15px;
-  background-color: chocolate;
   justify-content: center;
 }
 

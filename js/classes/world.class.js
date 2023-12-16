@@ -37,7 +37,6 @@ class World {
       this.checkBossCollision();
       this.checkHealth();
       this.checkEndbossCollision();
-
       this.checkCollect();
       this.checkThrowObjects();
       this.checkBottleCollect();

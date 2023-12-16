@@ -25,27 +25,26 @@ document.getElementById("story-container"); settingsContent.innerHTML +=
 document.getElementById("story-container"); settingsContent.innerHTML +=
 /*html*/ `
 <button class="return-button" onclick="refBack()">Back</button>
-<h1>Leaderboard & Informations</h1>
+<h1>How to Play</h1>
 <section class="container-for-information">
-  <div class="leaderboard-container">
-    <ol class="leadboard-list" id="leaderboardList">
-      <li class="leaderboard-entry">
-        <span class="rank">1.</span>
-        <span class="name">Tim</span>
-        <span class="score">5</span>
-      </li>
-      <li class="leaderboard-entry">
-        <span class="rank">2.</span>
-        <span class="name">Markus</span>
-        <span class="score">3</span>
-      </li>
-      <li class="leaderboard-entry">
-        <span class="rank">3.</span>
-        <span class="name">Janine</span>
-        <span class="score">2</span>
-      </li>
-    </ol>
-  </div>
+  <section class="description-div">
+    <div class="explain-div">
+      <img src="./img/keyimg/leftkey.png" alt="" />
+      <p>Move Left</p>
+    </div>
+    <div class="explain-div">
+      <img src="./img/keyimg/rightkey.png" alt="" />
+      <p>Move Right</p>
+    </div>
+    <div class="explain-div">
+      <img src="./img/keyimg/sapcekey.png" alt="" />
+      <p>Jump</p>
+    </div>
+    <div class="explain-div">
+      <img src="./img/keyimg/dkey.png" alt="" />
+      <p>Throw</p>
+    </div>
+  </section>
   <div class="notes-div">
     Notes on the game: <br />
     - Collect as many coins as possible and kill the boss <br />
