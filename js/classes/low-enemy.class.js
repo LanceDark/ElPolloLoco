@@ -52,10 +52,10 @@ class LowEnemy extends MoveableObject {
     setInterval(() => {
       if (!this.isDead) {
         this.moveLeft();
-        this.adjustHitbox()
+        this.adjustHitbox();
       }
       this.updatePosition();
-      this.adjustHitbox()
+      this.adjustHitbox();
     }, 1000 / 60);
 
     setInterval(() => {
@@ -71,5 +71,4 @@ class LowEnemy extends MoveableObject {
       this.y += this.velocityY; // Bewegung der "toten" Hühner nach unten
     }
   }
-
 }

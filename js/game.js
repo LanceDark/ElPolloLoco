@@ -7,14 +7,12 @@ let backgroundMusic = new Audio("./music/background-music.mp3");
 backgroundMusic.muted = true;
 backgroundMusic.volume = 0.1;
 
+document.addEventListener("DOMContentLoaded", startBackgroundMusic);
 
 function startBackgroundMusic() {
   backgroundMusic.muted = false;
   backgroundMusic.play();
 }
-
-// Event-Listener, der die Funktion beim Laden der Seite aufruft
-document.addEventListener('DOMContentLoaded', startBackgroundMusic);
 
 /**
  * starting screen, inits backgroundimg and a button to start the game
@@ -46,7 +44,8 @@ function init() {
   world = new World(canvas, keyboard);
   deleteButton();
   deleteStory();
-  turnScreen()
+  touchPanels();
+  turnScreen();
 }
 
 function deleteStory() {
@@ -169,14 +168,13 @@ function musicToggle() {
 
 function turnScreen() {
   window.addEventListener("orientationchange", function () {
-      if (window.matchMedia("(orientation: portrait)").matches) {
-          document.getElementById("changeScreen").style.display = "flex";
-      } else {
-          document.getElementById("changeScreen").style.display = "none";        
-      }
+    if (window.matchMedia("(orientation: portrait)").matches) {
+      document.getElementById("changeScreen").style.display = "flex";
+    } else {
+      document.getElementById("changeScreen").style.display = "none";
+    }
   });
 }
-
 
 window.addEventListener("keydown", (e) => {
   if (e.keyCode == 39) {
@@ -219,3 +217,50 @@ window.addEventListener("keyup", (e) => {
     keyboard.D = false;
   }
 });
+
+function touchPanels() {
+  let leftMove = document.getElementById("leftMove");
+  let rightMove = document.getElementById("rightMove");
+  let jumpMove = document.getElementById("jumpMove");
+  let throwMove = document.getElementById("throwMove");
+
+  leftMove.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    keyboard.LEFT = true;
+  });
+
+  leftMove.addEventListener("touchend", (e) => {
+    e.preventDefault();
+    keyboard.LEFT = false;
+  });
+
+  rightMove.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    keyboard.RIGHT = true;
+  });
+
+  rightMove.addEventListener("touchend", (e) => {
+    e.preventDefault();
+    keyboard.RIGHT = false;
+  });
+
+  jumpMove.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    keyboard.SPACE = true;
+  });
+
+  jumpMove.addEventListener("touchend", (e) => {
+    e.preventDefault();
+    keyboard.SPACE = false;
+  });
+
+  throwMove.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    keyboard.D = true;
+  });
+
+  throwMove.addEventListener("touchend", (e) => {
+    e.preventDefault();
+    keyboard.D = false;
+  });
+}

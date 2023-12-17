@@ -1,59 +1,64 @@
 @media only screen and (max-width: 720px) {
-    canvas {
-      width: 100%;
-    }
+  canvas {
+    width: 100%;
   }
-  
-  @media only screen and (max-height: 480px) {
-    canvas {
-      height: 100%;
-    }
-  
-    h1 {
-      display: none;
-    }
-  
-    .description-div {
-      display: none;
-    }
+}
+
+@media only screen and (max-height: 480px) {
+  canvas {
+    height: 100%;
   }
-  
+
+  h1 {
+    display: none;
+  }
+}
 
 @media (display-mode: fullscreen) {
-    #changeScreen {
-        display: none;
-    }
+  #changeScreen {
+    display: none;
+  }
 
-    #changeScreen {
-        display: flex;
-    }
+  #changeScreen {
+    display: flex;
+  }
 }
 
 @media (max-height: 600px) {
-    h1 {
-        display: none;
-    }
+  h1 {
+    display: none;
+  }
 }
 
 @media (max-width: 560px) {
-    button {
-        font-size: 10px
-    }
+  button {
+    font-size: 10px;
+  }
 }
 
 @media only screen and (orientation: portrait) and (max-width: 600px) {
-    .change-screen {
-        display: flex;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 999;
-        background-color: rgba(0, 0, 0, 0.5);
-    }
+  .change-screen {
+    display: flex;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
 
-    .touch-panels {
-        display:flex;
-    }
+  .touch-panels {
+    display: flex;
+  }
+}
+
+@media only screen and (orientation: landscape) and (max-width: 800px) {
+  .change-screen {
+    display: none;
+  }
+
+  .touch-panels {
+    display: flex;
+  }
 }
