@@ -7,11 +7,19 @@ class DrawableObject {
   height = 150;
   width = 100;
 
+  /**
+   * Load Images to Display them on Canvas
+   * @param {*} path
+   */
   loadImage(path) {
     this.img = new Image();
     this.img.src = path;
   }
 
+  /**
+   * Draw every Obejct on Canvas
+   * @param {canvas} ctx
+   */
   draw(ctx) {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
@@ -29,14 +37,13 @@ class DrawableObject {
     });
   }
 
-//  drawFrame(ctx) {
-//  if (this.hitbox) {
-//      ctx.beginPath();
-//     ctx.lineWidth = "3";
-//     ctx.strokeStyle = "blue";
-//     ctx.rect(this.hitbox.x, this.hitbox.y, this.hitbox.width, this.hitbox.height);
-//     ctx.stroke();
-//    }
-//  }
-
+  //  drawFrame(ctx) {
+  //  if (this.hitbox) {
+  //      ctx.beginPath();
+  //     ctx.lineWidth = "3";
+  //     ctx.strokeStyle = "blue";
+  //     ctx.rect(this.hitbox.x, this.hitbox.y, this.hitbox.width, this.hitbox.height);
+  //     ctx.stroke();
+  //    }
+  //  }
 }

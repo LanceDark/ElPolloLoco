@@ -1,7 +1,7 @@
 class Character extends MoveableObject {
   height = 300;
   width = 150;
-  y = 80; // 140 default
+  y = 80;
   x = 50;
   speed = 5;
   IMAGES_WALKING = [
@@ -62,15 +62,14 @@ class Character extends MoveableObject {
     "./img/2_character_pepe/1_idle/long_idle/I-20.png",
   ];
   IMAGES_PEPE_DEAD = [
-    "./img/9_intro_outro_screens/game_over/oh no you lost!.png"
+    "./img/9_intro_outro_screens/game_over/oh no you lost!.png",
   ];
   currentImage = 0;
   world;
   walking_sound = new Audio("./music/Walking.mp3");
-  gameover_sound = new Audio("./music/lost_player.wav")
+  gameover_sound = new Audio("./music/lost_player.wav");
   dead = false;
   hitboxOffsetX = 10;
-  hitboxOffesetY = 110;
   hitboxOffsetWidth = 20;
   hitboxOffsetHeight = 110;
 
@@ -87,6 +86,9 @@ class Character extends MoveableObject {
     this.applyGravity();
   }
 
+  /**
+   * get a various Hitbox to allow different Situations and make it more correct to hit object
+   */
   adjustHitbox() {
     this.hitbox = {
       x: this.x + this.hitboxOffsetX,
@@ -96,6 +98,9 @@ class Character extends MoveableObject {
     };
   }
 
+  /**
+   * All Animations for the Character
+   */
   animateCharacter() {
     this.adjustHitbox();
     setInterval(() => {
@@ -104,20 +109,18 @@ class Character extends MoveableObject {
         this.moveRight();
         this.otherDirection = false;
         if (!isMuted) {
-        this.walking_sound.play();
+          this.walking_sound.play();
         }
         this.adjustHitbox();
       }
-
       if (this.world.keyboard.LEFT && this.x > -200) {
         this.moveLeft();
         this.otherDirection = true;
-        if (!isMuted){
-        this.walking_sound.play();
+        if (!isMuted) {
+          this.walking_sound.play();
         }
         this.adjustHitbox();
       }
-
       if (this.world.keyboard.SPACE && !this.isAboveGround()) {
         this.adjustHitbox();
         this.jump();
@@ -125,13 +128,12 @@ class Character extends MoveableObject {
       this.adjustHitbox();
       this.world.camera_x = -this.x + 75;
     }, 1000 / 60);
-
     setInterval(() => {
       if (this.isDead() && this.dead === false) {
         this.deadAnimation = 0;
-          this.pepeDead();
-          this.gameover_sound.play();
-          this.dead = true;
+        this.pepeDead();
+        this.gameover_sound.play();
+        this.dead = true;
       } else if (this.isHurt()) {
         this.idleTimeout = 0;
         this.playAnimation(this.IMAGES_HURT);
@@ -147,13 +149,18 @@ class Character extends MoveableObject {
     }, 100);
   }
 
-  pepeDead(){
-    this.playAnimation(this.IMAGES_DEAD)
+  /**
+   * Dead Animation for Character
+   */
+  pepeDead() {
+    this.playAnimation(this.IMAGES_DEAD);
     this.deadAnimation += 100;
-    if (this.deadAnimation >= 200)
-    this.playAnimation(this.IMAGES_PEPE_DEAD);
+    if (this.deadAnimation >= 200) this.playAnimation(this.IMAGES_PEPE_DEAD);
   }
 
+  /**
+   * Idle Animation for Character
+   */
   playIdle() {
     this.playAnimation(this.IMAGES_IDLE);
     this.idleTimeout += 150;

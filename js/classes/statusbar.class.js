@@ -18,12 +18,20 @@ class StatusBar extends DrawableObject {
     this.width = 250;
   }
 
+  /**
+   * Percentage for switching between Index pictures, to show right Value
+   * @param {Number} percentage
+   */
   setPercentage(percentage) {
     this.percentage = percentage;
     let path = this.IMAGES_BAR[this.resolveImageIndex()];
     this.img = this.imageCache[path];
   }
 
+  /**
+   * Returns Picture of various Endbosslife %
+   * @returns
+   */
   resolveImageIndex() {
     if (this.percentage == 100) {
       return 5;

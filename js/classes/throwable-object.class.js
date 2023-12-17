@@ -22,6 +22,9 @@ class ThrowableObject extends MoveableObject {
     this.acceleration = acceleration;
   }
 
+  /**
+   *Animation for Throw over the Map so object can  "fly" in an angle
+   */
   throw() {
     clearInterval(this.throwBottleInterval);
     this.loadImage(
@@ -44,11 +47,18 @@ class ThrowableObject extends MoveableObject {
     }, 25);
   }
 
+  /**
+   * Stop animation
+   */
   stopAnimation() {
     clearInterval(this.throwBottleInterval);
     this.isPlayingAnimation = false;
   }
 
+  /**
+   * Bottle is animated while flying
+   * @returns 
+   */
   animateBottle() {
     this.bottleIsCollidingBoss = false;
     this.isPlayingAnimation = true;
@@ -73,6 +83,9 @@ class ThrowableObject extends MoveableObject {
     }
   }
 
+  /**
+   * bottle flys down after hit a y point
+   */
   applyGravityForBottle() {
     if (!(this.y >= 350) && !this.bottleIsCollidingBoss) {
       this.y -= this.speedY;
@@ -83,6 +96,9 @@ class ThrowableObject extends MoveableObject {
     }
   }
 
+  /**
+   * check the Position of Bottle and turn back a Animation when on ground
+   */
   checkBottlePosition() {
     if (this.y >= 350) {
       clearInterval(this.throwBottleInterval);
@@ -90,10 +106,17 @@ class ThrowableObject extends MoveableObject {
     }
   }
 
+  /**
+   * play Animation when bottle reached floor
+   */
   playGroundAnimation() {
     this.updateImageBottle(this.groundBottle[0]);
   }
 
+  /**
+   * update Image Chache to have access to right im on Animations
+   * @param {} newImageUrl 
+   */
   updateImageBottle(newImageUrl) {
     if (this.imageCache[newImageUrl]) {
       this.img = this.imageCache[newImageUrl];

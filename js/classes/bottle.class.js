@@ -19,19 +19,27 @@ class Bottle extends ThrowableObject {
     this.loadImages(this.IMAGES_SPLASH);
     this.x = x;
     this.y = y;
-    this.adjustHitbox()
+    this.adjustHitbox();
     this.throwBottleInterval = null;
   }
 
+  /**
+   * get a various Hitbox to allow different Situations and make it more correct to hit object
+   */
   adjustHitbox() {
     this.hitbox = {
-      x: this.x + 10 ,
+      x: this.x + 10,
       y: this.y + 10,
       width: this.width - 20,
-      height: this.height -15,
+      height: this.height - 15,
     };
   }
 
+  /**
+   *
+   * @param {*} character
+   * @returns true or false to see if i can collect or not
+   */
   isCollectedBy(character) {
     if (!this.isCollected && character.isColliding(this)) {
       this.isCollected = true;
@@ -40,9 +48,12 @@ class Bottle extends ThrowableObject {
     return false;
   }
 
+  /**
+   * Animation
+   */
   splashAnimation() {
     this.playAnimation(this.IMAGES_SPLASH);
-    setTimeout(() =>{
+    setTimeout(() => {
       this.isPlayingAnimation = false;
     }, this.IMAGES_SPLASH.length * 400);
   }

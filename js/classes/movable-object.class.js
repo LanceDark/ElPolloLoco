@@ -9,6 +9,9 @@ class MoveableObject extends DrawableObject {
   bottle = 0;
   bosshp = 100;
 
+  /**
+   * Gravity for Objects in the Canvas
+   */
   applyGravity() {
     setInterval(() => {
       if (this.isAboveGround() || this.speedY > 0) {
@@ -18,6 +21,10 @@ class MoveableObject extends DrawableObject {
     }, 1000 / 25);
   }
 
+  /**
+   *
+   * @returns if a Object is above y = 140
+   */
   isAboveGround() {
     if (this instanceof ThrowableObject) {
       return true;
@@ -25,7 +32,11 @@ class MoveableObject extends DrawableObject {
     return this.y < 140;
   }
 
-  // character.isColliding.chicken()
+  /**
+   * Check Collision of an Object with an other Object. ALERT with HITBOX!
+   * @param {*} MoveableObject
+   * @returns
+   */
   isColliding(MoveableObject) {
     if (this.hitbox && MoveableObject.hitbox) {
       return (
@@ -37,6 +48,12 @@ class MoveableObject extends DrawableObject {
     }
   }
 
+  /**
+   * Check if it is Above a Chicken to hit it
+   * @param {*} MoveableObject
+   * @param {*} lowEnemy
+   * @returns true/false
+   */
   isAboveChicken(MoveableObject, lowEnemy) {
     const isAbove =
       MoveableObject.hitbox.y + MoveableObject.hitbox.height ===
@@ -45,6 +62,10 @@ class MoveableObject extends DrawableObject {
     return isAbove;
   }
 
+  /**
+   * play Animations with images of the current ImageChache
+   * @param {*} images
+   */
   playAnimation(images) {
     let i = this.currentImage % images.length; // let i = 0 % 6; % = Mathematischer Rest. Resetted den Rest Wert auf 0. - 0,1,2,3,4,5, 0!!!
     let path = images[i];
@@ -52,18 +73,30 @@ class MoveableObject extends DrawableObject {
     this.currentImage++;
   }
 
+  /**
+   * movement on x right side
+   */
   moveRight() {
     this.x += this.speed;
   }
 
+  /**
+   * movement on x left side
+   */
   moveLeft() {
     this.x -= this.speed;
   }
 
+  /**
+   * movement on y top
+   */
   jump() {
     this.speedY = 25;
   }
 
+  /**
+   * Hit from Enemys to character reduce energy of Character
+   */
   hit() {
     this.energy -= 5;
     if (this.energy < 0) {
@@ -73,10 +106,18 @@ class MoveableObject extends DrawableObject {
     }
   }
 
+  /**
+   * check Enegery
+   * @returns dead
+   */
   isDead() {
     return this.energy === 0;
   }
 
+  /**
+   * increase player coins when collect
+   * @returns
+   */
   coinCollect() {
     if (this.coin < 100) {
       this.coin += 20;
@@ -85,6 +126,10 @@ class MoveableObject extends DrawableObject {
     }
   }
 
+  /**
+   * increase player bottle when collect
+   * @returns
+   */
   bottleCollect() {
     if (this.bottle < 100) {
       this.bottle += 20;
@@ -93,6 +138,10 @@ class MoveableObject extends DrawableObject {
     }
   }
 
+  /**
+   * default hurt function. Check time when last time get hurted to avoid errors of multiple hits on same second
+   * @returns
+   */
   isHurt() {
     let timePassed = new Date().getTime() - this.lastHit; // difference in ms
     timePassed = timePassed / 1000; // difference in sec.

@@ -29,20 +29,20 @@ document.getElementById("story-container"); settingsContent.innerHTML +=
 <section class="container-for-information">
   <section class="description-div">
     <div class="explain-div">
-      <img src="./img/keyimg/leftkey.png" alt="" />
-      <p>Move Left</p>
+      <img src="./img/touchPanels/back.png" alt="" />
+      <p>Move Left/Arrow Left</p>
     </div>
     <div class="explain-div">
-      <img src="./img/keyimg/rightkey.png" alt="" />
-      <p>Move Right</p>
+      <img src="./img/touchPanels/right-arrow.png" alt="" />
+      <p>Move Right/Arrow Right</p>
     </div>
     <div class="explain-div">
-      <img src="./img/keyimg/sapcekey.png" alt="" />
-      <p>Jump</p>
+      <img src="./img/touchPanels/up-arrow.png" alt="" />
+      <p>Jump/Spacebar</p>
     </div>
     <div class="explain-div">
-      <img src="./img/keyimg/dkey.png" alt="" />
-      <p>Throw</p>
+      <img src="./img/touchPanels/game.png" alt="" />
+      <p>Throw/Key D</p>
     </div>
   </section>
   <div class="notes-div">

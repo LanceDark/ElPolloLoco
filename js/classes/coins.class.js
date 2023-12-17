@@ -1,8 +1,5 @@
 class Coin extends MoveableObject {
-  IMAGES_COINS = [
-    "./img/8_coin/coin_1.png",
-    "./img/8_coin/coin_2.png"
-  ];
+  IMAGES_COINS = ["./img/8_coin/coin_1.png", "./img/8_coin/coin_2.png"];
   isCollected = false;
 
   constructor(x, y) {
@@ -13,13 +10,19 @@ class Coin extends MoveableObject {
     this.animateCoins();
   }
 
-  animateCoins(){
-    setInterval(() =>{
+  /**
+   * Animation for Coin
+   */
+  animateCoins() {
+    setInterval(() => {
       this.playAnimation(this.IMAGES_COINS);
       this.adjustHitbox();
-    }, 200)
+    }, 200);
   }
 
+  /**
+   * get a various Hitbox to allow different Situations and make it more correct to hit object
+   */
   adjustHitbox() {
     this.hitbox = {
       x: this.x,
@@ -29,6 +32,10 @@ class Coin extends MoveableObject {
     };
   }
 
+  /**
+   * @param {*} character
+   * @returns true or false to see if i can collect or not
+   */
   isCollectedBy(character) {
     if (!this.isCollected && character.isColliding(this)) {
       this.isCollected = true;
@@ -36,5 +43,4 @@ class Coin extends MoveableObject {
     }
     return false;
   }
-
 }

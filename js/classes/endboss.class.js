@@ -62,6 +62,9 @@ class Endboss extends MoveableObject {
     this.deadBossPlayed = false;
   }
 
+  /**
+   * get a various Hitbox to allow different Situations and make it more correct to hit object
+   */
   adjustHitbox() {
     this.hitbox = {
       x: this.x + 45,
@@ -71,6 +74,10 @@ class Endboss extends MoveableObject {
     };
   }
 
+  /**
+   * Check if Endboss got a hit and reset it to get mutiple hits in a short time
+   * @param {*} damage
+   */
   endbossHitDamage(damage) {
     this.bosshp -= damage;
     if (this.bosshp < 0) {
@@ -80,6 +87,10 @@ class Endboss extends MoveableObject {
     }
   }
 
+  /**
+   * Animation of Endboss
+   * @returns
+   */
   animateEndboss() {
     if (this.bosshp > 0) {
       this.moveInterval = setInterval(() => {
@@ -92,6 +103,11 @@ class Endboss extends MoveableObject {
     } else return;
   }
 
+  /**
+   * Check if Object hit the Endboss
+   * @param {*} boss
+   * @returns collision true or false
+   */
   isCollidingBoss(boss) {
     let collision =
       this.hitbox.x < boss.x + boss.width &&
@@ -104,6 +120,9 @@ class Endboss extends MoveableObject {
     return collision;
   }
 
+  /**
+   * Animations after boss on 0 HP, stop intervals and play a dead interval
+   */
   checkBossHp() {
     if (this.bosshp === 0) {
       clearInterval(this.angryInterval);
@@ -121,6 +140,9 @@ class Endboss extends MoveableObject {
     }
   }
 
+  /**
+   * animation for Boss
+   */
   animateAngryBoss() {
     if (this.bosshp > 0) {
       this.angryInterval = setInterval(() => {
@@ -129,6 +151,9 @@ class Endboss extends MoveableObject {
     }
   }
 
+  /**
+   * animation for Boss
+   */
   animateAngryMoveBoss() {
     if (this.bosshp > 0) {
       this.angryInterval2 = setInterval(() => {
@@ -137,6 +162,9 @@ class Endboss extends MoveableObject {
     }
   }
 
+  /**
+   * animation for Boss
+   */
   animateDeadBoss() {
     if (this.bosshp === 0) {
       this.updateImage("./img/4_enemie_boss_chicken/5_dead/G24.png");
@@ -148,10 +176,16 @@ class Endboss extends MoveableObject {
     }
   }
 
+  /**
+   * Update the Image Chache to put new img in
+   */
   updateImage(newImageUrl) {
     this.img = this.imageCache[newImageUrl];
   }
 
+  /**
+   * Various Movementspeed for Endboss
+   */
   enbossMoveBoost() {
     this.speed = 1.5;
     this.animateAngryMoveBoss();

@@ -28,6 +28,9 @@ class World {
     this.run();
   }
 
+  /**
+   * Intervals which are working all game long to check several Events
+   */
   run() {
     setInterval(() => {
       this.checkEndbossHealth();
@@ -44,6 +47,9 @@ class World {
     }, 20);
   }
 
+  /**
+   * Boss Collision
+   */
   checkBossCollision() {
     if (this.endboss && this.endboss.length > 0) {
       this.throwableObject.forEach((bottle) => {
@@ -57,6 +63,9 @@ class World {
     }
   }
 
+  /**
+   * All events after get hit by Endboss
+   */
   checkEndbossCollision() {
     let endboss = this.endboss[0];
     if (endboss.isColliding(this.character)) {
@@ -67,10 +76,17 @@ class World {
     }
   }
 
+  /**
+   * Endboss health update
+   */
   checkEndbossHealth() {
     this.endboss[0].checkBossHp();
   }
 
+  /**
+   * All Events when endboss got hit by a Bottle of Player
+   * @param {*} bottle
+   */
   handleCollidingBottle(bottle) {
     bottle.bottleIsCollidingBoss = true;
     if (bottle.isPlayingAnimation) {
@@ -87,6 +103,10 @@ class World {
     }
   }
 
+  /**
+   * Animation of Bottle, when Hit boss. Splash
+   * @param {*} bottle
+   */
   handleAnimation(bottle) {
     bottle.stopAnimation();
     bottle.splashAnimation();
@@ -95,6 +115,10 @@ class World {
     }, 500);
   }
 
+  /**
+   * check Condiditons so that bottle Start to fly, and reduce the Bottle amount of Player
+   * @returns
+   */
   checkThrowObjects() {
     if (
       this.keyboard.D &&
@@ -112,6 +136,9 @@ class World {
     }
   }
 
+  /**
+   * Collision Tracker with chickens and return events of lower HP, Coins
+   */
   checkCollisions() {
     this.level.lowEnemy.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
@@ -127,6 +154,10 @@ class World {
     });
   }
 
+  /**
+   * Kill Enemy on Jumps and Play Music for it aswell
+   * @param {*} enemy
+   */
   handleJumpOnEnemy(enemy) {
     if (enemy instanceof miniChicken) {
       let jumpSound = new Audio("./music/jump_player.wav");
@@ -151,10 +182,16 @@ class World {
     }
   }
 
+  /**
+   * @returns if Player is above y.
+   */
   playerIsAboveGround() {
     return this.character.isAboveGround();
   }
 
+  /**
+   *  Check Collect of the Coin and add Sound to it aswell, Old coin get deleted
+   */
   checkCollect() {
     this.level.coin.forEach((coin, index) => {
       if (coin.isCollectedBy(this.character) && this.character.coin < 100) {
@@ -170,6 +207,9 @@ class World {
     });
   }
 
+  /**
+   * Check Collect of the bottle and add Sound to it aswell, Old bottle get deleted
+   */
   checkBottleCollect() {
     this.level.bottle.forEach((bottle) => {
       if (bottle.isCollectedBy(this.character) && this.character.bottle < 100) {
@@ -183,6 +223,10 @@ class World {
     });
   }
 
+  /**
+   * Check Player health to control death screen
+   * @returns
+   */
   checkHealth() {
     if (this.character.energy <= 0) {
       gameOverScreen();
@@ -190,6 +234,10 @@ class World {
     } else return;
   }
 
+  /**
+   * delete a object from Canvas
+   * @param {} objectToRemove
+   */
   removeObject(objectToRemove) {
     let i = this.throwableObject.indexOf(objectToRemove);
     if (i !== -1) {
@@ -197,14 +245,23 @@ class World {
     }
   }
 
+  /**
+   * set world to work with
+   */
   setWorld() {
     this.character.world = this;
   }
 
+  /**
+   * end all Intervals, important to end Game
+   */
   endAnimations() {
     for (let i = 1; i < 9999; i++) window.clearInterval(i);
   }
 
+  /**
+   * Draw all object to Canvas
+   */
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -236,12 +293,20 @@ class World {
     });
   }
 
+  /**
+   * Add Objects to the Canvas+
+   * @param {*} objects
+   */
   addObjectsToMap(objects) {
     objects.forEach((o) => {
       this.addToMap(o);
     });
   }
 
+  /**
+   * Possibility charakter can walk backwards and turn the image
+   * @param {*} moveableObject
+   */
   addToMap(moveableObject) {
     if (moveableObject.otherDirection) {
       this.flipImage(moveableObject);
@@ -253,6 +318,10 @@ class World {
     }
   }
 
+  /**
+   * Possibility charakter can walk backwards and turn the image
+   * @param {*} moveableObject
+   */
   flipImage(moveableObject) {
     this.ctx.save();
     this.ctx.translate(moveableObject.width, 0);
@@ -260,6 +329,10 @@ class World {
     moveableObject.x = moveableObject.x * -1;
   }
 
+  /**
+   * Possibility charakter can walk backwards and turn the image
+   * @param {*} moveableObject
+   */
   flipImageBack(moveableObject) {
     moveableObject.x = moveableObject.x * -1;
     this.ctx.restore();

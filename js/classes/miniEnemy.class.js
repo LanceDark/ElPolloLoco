@@ -9,9 +9,7 @@ class miniChicken extends MoveableObject {
     "./img/3_enemies_chicken/chicken_small/1_walk/2_w.png",
     "./img/3_enemies_chicken/chicken_small/1_walk/3_w.png",
   ];
-  IMAGES_DEAD = [
-    "./img/3_enemies_chicken/chicken_small/2_dead/dead.png"
-  ]
+  IMAGES_DEAD = ["./img/3_enemies_chicken/chicken_small/2_dead/dead.png"];
 
   constructor(imageUrl) {
     super().loadImage("./img/3_enemies_chicken/chicken_small/1_walk/1_w.png");
@@ -23,6 +21,9 @@ class miniChicken extends MoveableObject {
     this.imageUrl = imageUrl;
   }
 
+  /**
+   * get a various Hitbox to allow different Situations and make it more correct to hit object
+   */
   adjustHitbox() {
     this.hitbox = {
       x: this.x + 0,
@@ -32,14 +33,17 @@ class miniChicken extends MoveableObject {
     };
   }
 
+  /**
+   * All Animations for the Chicken
+   */
   animateChicken() {
     setInterval(() => {
       if (!this.isDead) {
         this.moveLeft();
-        this.adjustHitbox()
+        this.adjustHitbox();
       }
       this.updatePosition();
-      this.adjustHitbox()
+      this.adjustHitbox();
     }, 1000 / 60);
 
     setInterval(() => {
@@ -50,12 +54,19 @@ class miniChicken extends MoveableObject {
     this.adjustHitbox();
   }
 
+  /**
+   * Update image so dead chicken get showed up
+   * @param {*} newImageUrl
+   */
   updateImage(newImageUrl) {
     if (!this.isDead) {
       this.img = this.imageCache[newImageUrl];
     }
   }
 
+  /**
+   * Delete Chicken if Dead
+   */
   removeChicken() {
     if (!this.isDead) {
       this.isDead = true;
@@ -63,6 +74,9 @@ class miniChicken extends MoveableObject {
     }
   }
 
+  /**
+   * Track Postition of chicken
+   */
   updatePosition() {
     if (this.isDead) {
       this.y += this.velocityY; // Bewegung der "toten" Hühner nach unten

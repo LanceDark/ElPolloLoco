@@ -18,7 +18,11 @@ class Endbosshp extends DrawableObject {
     this.height = 75;
     this.width = 250;
   }
-
+  
+  /**
+   * Check if Endboss got a hit and reset it to get mutiple hits in a short time
+   * @param {*} damage
+   */
   endbossHit(damage) {
     this.bosshp -= damage;
     if (this.bosshp < 0) {
@@ -28,18 +32,30 @@ class Endbosshp extends DrawableObject {
     }
   }
 
+  /**
+   * tracks the last hit to avoid errors of multiple hits in seconds
+   * @returns
+   */
   isHurt() {
     let timePassed = new Date().getTime() - this.lastHit; // difference in ms
     timePassed = timePassed / 1000; // difference in sec.
     return timePassed < 1;
   }
 
+  /**
+   * Percentage for switching between Index pictures, to show right Value
+   * @param {Number} percentage
+   */
   setPercentage(percentage) {
     this.percentage = percentage;
     let path = this.IMAGES_ENDBOSS_HP_BAR[this.resolveImageIndex()];
     this.img = this.imageCache[path];
   }
 
+  /**
+   * Returns Picture of various Endbosslife %
+   * @returns
+   */
   resolveImageIndex() {
     if (this.percentage == 100) {
       return 5;

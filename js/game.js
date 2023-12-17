@@ -6,9 +6,11 @@ let fullScreen = false;
 let backgroundMusic = new Audio("./music/background-music.mp3");
 backgroundMusic.muted = true;
 backgroundMusic.volume = 0.1;
-
 document.addEventListener("DOMContentLoaded", startBackgroundMusic);
 
+/**
+ * start for Background Music after webpage is fully loaded
+ */
 function startBackgroundMusic() {
   backgroundMusic.muted = false;
   backgroundMusic.play();
@@ -34,10 +36,16 @@ function startScreen() {
   };
 }
 
+/**
+ * return to landing page
+ */
 function refBack() {
   window.location.href = "index.html";
 }
 
+/**
+ * start game and delete all other HTML witch are not neccessary
+ */
 function init() {
   initLevel();
   canvas = document.getElementById("playground");
@@ -48,16 +56,25 @@ function init() {
   turnScreen();
 }
 
+/**
+ * delete HTML
+ */
 function deleteStory() {
   let storyContent = document.getElementById("story-container");
   storyContent.style.display = "none";
 }
 
+/**
+ * delete HTML
+ */
 function deleteButton() {
   let menuButtons = document.getElementById("menu");
   menuButtons.style.display = "none";
 }
 
+/**
+ * open HTML template for Settings
+ */
 function openSettings() {
   let contents = document.getElementById("story-container");
   contents.style.display = "flex";
@@ -66,6 +83,9 @@ function openSettings() {
   openSetting();
 }
 
+/**
+ * put on start Background to canvas
+ */
 function getNewBackground() {
   let canvas = document.getElementById("playground");
   let ctx = canvas.getContext("2d");
@@ -83,6 +103,9 @@ function getNewBackground() {
   };
 }
 
+/**
+ * open html pepe Story
+ */
 function pepeStory() {
   let content = document.getElementById("story-container");
   content.style.display = "flex";
@@ -91,10 +114,16 @@ function pepeStory() {
   openPepeStory();
 }
 
+/**
+ * open HTML
+ */
 function openPepeStory() {
   story();
 }
 
+/**
+ * open how to play
+ */
 function openLevelSelect() {
   let content = document.getElementById("story-container");
   content.style.display = "flex";
@@ -103,11 +132,17 @@ function openLevelSelect() {
   openLevel();
 }
 
+/**
+ * open game over html
+ */
 function gameOverScreen() {
   let end = document.getElementById("game-over-screen");
   end.style.display = "flex";
 }
 
+/**
+ * add fullscreen
+ */
 function fullscreen() {
   let content = document.getElementById("content");
   let canvas = document.getElementById("playground");
@@ -131,6 +166,10 @@ function fullscreen() {
   }
 }
 
+/**
+ * help function to open fullscreen
+ * @param {} element
+ */
 function applyFullscreen(element) {
   if (element.requestFullscreen) {
     element.requestFullscreen();
@@ -141,6 +180,9 @@ function applyFullscreen(element) {
   }
 }
 
+/**
+ * close Fullscreen
+ */
 function endFullScreen() {
   if (document.exitFullscreen) {
     document.exitFullscreen();
@@ -149,6 +191,9 @@ function endFullScreen() {
   }
 }
 
+/**
+ * function to mute music or unmute Music
+ */
 function musicToggle() {
   let soundButton = document.getElementById("soundButton");
   soundButton.innerHTML = "";
@@ -166,16 +211,22 @@ function musicToggle() {
   }
 }
 
+/**
+ *  Function to show that you have to change screen orientation
+ */
 function turnScreen() {
   window.addEventListener("orientationchange", function () {
     if (window.matchMedia("(orientation: portrait)").matches) {
       document.getElementById("changeScreen").style.display = "flex";
-    } else {
+    } else if (window.matchMedia("(orientation: landscape)").matches) {
       document.getElementById("changeScreen").style.display = "none";
     }
   });
 }
 
+/**
+ * events for Keydowns
+ */
 window.addEventListener("keydown", (e) => {
   if (e.keyCode == 39) {
     keyboard.RIGHT = true;

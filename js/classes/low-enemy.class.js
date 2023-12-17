@@ -25,6 +25,9 @@ class LowEnemy extends MoveableObject {
     this.hitbox = this.adjustHitbox();
   }
 
+  /**
+   * get a various Hitbox to allow different Situations and make it more correct to hit object
+   */
   adjustHitbox() {
     this.hitbox = {
       x: this.x + 0,
@@ -34,20 +37,29 @@ class LowEnemy extends MoveableObject {
     };
   }
 
+  /**
+   * Update image so dead chicken get showed up
+   * @param {*} newImageUrl 
+   */
   updateImage(newImageUrl) {
     if (!this.isDead) {
       this.img = this.imageCache[newImageUrl];
     }
   }
 
+  /**
+   * Delete Chicken if Dead
+   */
   removeChicken() {
     if (!this.isDead) {
       this.isDead = true;
-      // this.speed = 0; // Entferne diese Zeile, um die Geschwindigkeit beizubehalten
       this.updateImage(this.IMAGES_CHICKEN_DEAD[0]);
     }
   }
 
+  /**
+   * All Animations for the Chicken
+   */
   animateChicken() {
     setInterval(() => {
       if (!this.isDead) {
@@ -66,6 +78,9 @@ class LowEnemy extends MoveableObject {
     this.adjustHitbox();
   }
 
+  /**
+   * Track Postition of chicken
+   */
   updatePosition() {
     if (this.isDead) {
       this.y += this.velocityY; // Bewegung der "toten" Hühner nach unten
