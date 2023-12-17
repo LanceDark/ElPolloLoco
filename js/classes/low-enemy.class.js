@@ -39,7 +39,7 @@ class LowEnemy extends MoveableObject {
 
   /**
    * Update image so dead chicken get showed up
-   * @param {*} newImageUrl 
+   * @param {*} newImageUrl
    */
   updateImage(newImageUrl) {
     if (!this.isDead) {
@@ -69,7 +69,6 @@ class LowEnemy extends MoveableObject {
       this.updatePosition();
       this.adjustHitbox();
     }, 1000 / 60);
-
     setInterval(() => {
       if (!this.isDead) {
         this.playAnimation(this.IMAGES_WALKING);

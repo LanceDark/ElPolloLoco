@@ -45,7 +45,6 @@ class miniChicken extends MoveableObject {
       this.updatePosition();
       this.adjustHitbox();
     }, 1000 / 60);
-
     setInterval(() => {
       if (!this.isDead) {
         this.playAnimation(this.IMAGES_WALKING);

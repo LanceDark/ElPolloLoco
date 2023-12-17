@@ -27,9 +27,7 @@ class ThrowableObject extends MoveableObject {
    */
   throw() {
     clearInterval(this.throwBottleInterval);
-    this.loadImage(
-      "./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png"
-    );
+    this.loadImage("./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png");
     this.speedY = 30;
     this.bottleIsCollidingBoss = false;
     if (this.y > 200 && this.y < 350 && !this.bottleIsCollidingBoss) {
@@ -38,6 +36,10 @@ class ThrowableObject extends MoveableObject {
       this.playGroundAnimation();
       this.speedY = 0;
     }
+    this.bottleInterval();
+  }
+
+  bottleInterval() {
     this.throwBottleInterval = setInterval(() => {
       this.x += 10;
       if (this.y >= 350) {
@@ -57,29 +59,33 @@ class ThrowableObject extends MoveableObject {
 
   /**
    * Bottle is animated while flying
-   * @returns 
+   * @returns
    */
   animateBottle() {
     this.bottleIsCollidingBoss = false;
     this.isPlayingAnimation = true;
     if (this.y < 350 && !this.bottleIsCollidingBoss) {
       this.throwBottleInterval = setInterval(() => {
-        if (!this.bottleIsCollidingBoss) {
-          this.playAnimation(this.IMAGES_THROW_BOTTLE);
-          this.applyGravityForBottle();
-          this.checkBottlePosition();
-          if (this.y >= 350) {
-            clearInterval(this.throwBottleInterval);
-            this.playGroundAnimation();
-            this.isPlayingAnimation = false;
-          }
-        }
+        this.bottleIntervalThrow();
       }, 30);
     } else {
       clearInterval(this.throwBottleInterval);
       this.playGroundAnimation();
       this.isPlayingAnimation = false;
       return;
+    }
+  }
+
+  bottleIntervalThrow() {
+    if (!this.bottleIsCollidingBoss) {
+      this.playAnimation(this.IMAGES_THROW_BOTTLE);
+      this.applyGravityForBottle();
+      this.checkBottlePosition();
+      if (this.y >= 350) {
+        clearInterval(this.throwBottleInterval);
+        this.playGroundAnimation();
+        this.isPlayingAnimation = false;
+      }
     }
   }
 
@@ -115,7 +121,7 @@ class ThrowableObject extends MoveableObject {
 
   /**
    * update Image Chache to have access to right im on Animations
-   * @param {} newImageUrl 
+   * @param {} newImageUrl
    */
   updateImageBottle(newImageUrl) {
     if (this.imageCache[newImageUrl]) {

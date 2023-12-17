@@ -126,8 +126,7 @@ class World {
       !this.character.isAboveGround()
     ) {
       if (!this.throwableObject) {
-        return;
-      }
+        return;}
       let bottle = new Bottle(this.character.x + 100, this.character.y + 100);
       this.throwableObject.push(bottle);
       this.character.bottle -= 10;
@@ -160,26 +159,30 @@ class World {
    */
   handleJumpOnEnemy(enemy) {
     if (enemy instanceof miniChicken) {
-      let jumpSound = new Audio("./music/jump_player.wav");
-      jumpSound.addEventListener("canplaythrough", () => {
-        jumpSound.play();
-      });
-      jumpSound.play();
-      enemy.updateImage(
-        "./img/3_enemies_chicken/chicken_small/2_dead/dead.png"
-      );
-      enemy.removeChicken();
+      this.killMiniChicken(enemy);
     } else if (enemy instanceof LowEnemy) {
-      let jumpSound = new Audio("./music/jump_player.wav");
-      jumpSound.addEventListener("canplaythrough", () => {
-        jumpSound.play();
-      });
-      jumpSound.play();
-      enemy.updateImage(
-        "./img/3_enemies_chicken/chicken_normal/2_dead/dead.png"
-      );
-      enemy.removeChicken();
+      this.killLowEnemy(enemy);
     }
+  }
+
+  killMiniChicken(enemy) {
+    let jumpSound = new Audio("./music/jump_player.wav");
+    jumpSound.addEventListener("canplaythrough", () => {
+      jumpSound.play();
+    });
+    jumpSound.play();
+    enemy.updateImage("./img/3_enemies_chicken/chicken_small/2_dead/dead.png");
+    enemy.removeChicken();
+  }
+
+  killLowEnemy(enemy) {
+    let jumpSound = new Audio("./music/jump_player.wav");
+    jumpSound.addEventListener("canplaythrough", () => {
+      jumpSound.play();
+    });
+    jumpSound.play();
+    enemy.updateImage("./img/3_enemies_chicken/chicken_normal/2_dead/dead.png");
+    enemy.removeChicken();
   }
 
   /**
