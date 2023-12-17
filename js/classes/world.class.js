@@ -26,6 +26,8 @@ class World {
     this.draw();
     this.setWorld();
     this.run();
+    this.playerImmunityTime = 1000;
+    this.isPlayerImmune = false;
   }
 
   /**
@@ -131,10 +133,18 @@ class World {
       this.throwableObject.push(bottle);
       this.character.bottle -= 10;
       this.bottlebar.earnBottle(this.character.bottle);
+      this.playBottleSound();
       bottle.throw();
     }
   }
 
+  playBottleSound(){
+    let bottleSound = new Audio("./music/bottlethrow.wav");
+    bottleSound.addEventListener("canplaythrough", () => {
+      bottleSound.play();
+    });
+    bottleSound.play();
+  }
   /**
    * Collision Tracker with chickens and return events of lower HP, Coins
    */
@@ -143,16 +153,24 @@ class World {
       if (this.character.isColliding(enemy)) {
         if (this.playerIsAboveGround()) {
           this.handleJumpOnEnemy(enemy);
-        } else if (!enemy.isDead && !this.playerIsAboveGround()) {
+        } else if (!enemy.isDead && !this.playerIsAboveGround() && !this.isPlayerImmune) {
           this.character.hit();
           this.statusbar.setPercentage(this.character.energy);
           this.character.coin -= 10;
           this.coinbar.coinReduce(this.character.coin);
+          this.setPlayerImmunity();
         }
       }
     });
   }
 
+
+  setPlayerImmunity(){
+    this.isPlayerImmune = true;
+    setTimeout(() => {
+      this.isPlayerImmune = false;
+    }, this.playerImmunityTime);
+  }
   /**
    * Kill Enemy on Jumps and Play Music for it aswell
    * @param {*} enemy
