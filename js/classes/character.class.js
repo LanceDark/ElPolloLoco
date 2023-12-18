@@ -70,7 +70,7 @@ class Character extends MoveableObject {
   gameover_sound = new Audio("./music/lost_player.wav");
   dead = false;
   hitboxOffsetX = 10;
-  hitboxOffsetWidth = 20;
+  hitboxOffsetWidth = 50;
   hitboxOffsetHeight = 110;
 
   constructor() {

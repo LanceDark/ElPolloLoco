@@ -25,10 +25,10 @@ class Coin extends MoveableObject {
    */
   adjustHitbox() {
     this.hitbox = {
-      x: this.x,
-      y: this.y,
-      width: this.width,
-      height: this.height,
+      x: this.x + 40,
+      y: this.y + 20,
+      width: this.width - 70,
+      height: this.height - 70,
     };
   }
 

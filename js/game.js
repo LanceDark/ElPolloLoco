@@ -6,7 +6,6 @@ let fullScreen = false;
 let backgroundMusic = new Audio("./music/background-music.mp3");
 backgroundMusic.muted = true;
 backgroundMusic.volume = 0.1;
-document.addEventListener("DOMContentLoaded", startBackgroundMusic);
 
 /**
  * start for Background Music after webpage is fully loaded
@@ -48,6 +47,7 @@ function refBack() {
  */
 function init() {
   initLevel();
+  startBackgroundMusic();
   canvas = document.getElementById("playground");
   world = new World(canvas, keyboard);
   deleteButton();

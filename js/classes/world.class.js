@@ -60,9 +60,22 @@ class World {
           !bottle.bottleIsCollidingBoss
         ) {
           this.handleCollidingBottle(bottle);
+        } else if (bottle.y >= 120) {
+          this.handleMissedBottle(bottle);
         }
       });
     }
+  }
+ /**
+  * controls the bottle which is falling on floor w/o colliding anything 
+  * @param {*} bottle 
+  */
+  handleMissedBottle(bottle) {
+    bottle.stopAnimation();
+    bottle.playGroundAnimation();
+    setTimeout(() => {
+      this.removeObject(bottle);
+    }, 100);
   }
 
   /**
@@ -128,7 +141,8 @@ class World {
       !this.character.isAboveGround()
     ) {
       if (!this.throwableObject) {
-        return;}
+        return;
+      }
       let bottle = new Bottle(this.character.x + 100, this.character.y + 100);
       this.throwableObject.push(bottle);
       this.character.bottle -= 10;
@@ -138,13 +152,17 @@ class World {
     }
   }
 
-  playBottleSound(){
+  /**
+   * Sound for Bottle throw
+   */
+  playBottleSound() {
     let bottleSound = new Audio("./music/bottlethrow.wav");
     bottleSound.addEventListener("canplaythrough", () => {
       bottleSound.play();
     });
     bottleSound.play();
   }
+
   /**
    * Collision Tracker with chickens and return events of lower HP, Coins
    */
@@ -153,7 +171,7 @@ class World {
       if (this.character.isColliding(enemy)) {
         if (this.playerIsAboveGround()) {
           this.handleJumpOnEnemy(enemy);
-        } else if (!enemy.isDead && !this.playerIsAboveGround() && !this.isPlayerImmune) {
+        } else if (this.conditions(enemy)) {
           this.character.hit();
           this.statusbar.setPercentage(this.character.energy);
           this.character.coin -= 10;
@@ -164,13 +182,25 @@ class World {
     });
   }
 
+  /**
+   * conditions for checkCollisions
+   * @param {*} enemy
+   * @returns
+   */
+  conditions(enemy) {
+    return !enemy.isDead && !this.playerIsAboveGround() && !this.isPlayerImmune;
+  }
 
-  setPlayerImmunity(){
+  /**
+   * Playerimmunity after a hit of enemy
+   */
+  setPlayerImmunity() {
     this.isPlayerImmune = true;
     setTimeout(() => {
       this.isPlayerImmune = false;
     }, this.playerImmunityTime);
   }
+
   /**
    * Kill Enemy on Jumps and Play Music for it aswell
    * @param {*} enemy
@@ -207,7 +237,7 @@ class World {
    * @returns if Player is above y.
    */
   playerIsAboveGround() {
-    return this.character.isAboveGround();
+    return this.character.isAboveGround() && !this.character.isHurt();
   }
 
   /**
@@ -333,7 +363,7 @@ class World {
       this.flipImage(moveableObject);
     }
     moveableObject.draw(this.ctx);
-    //moveableObject.drawFrame(this.ctx);
+    // moveableObject.drawFrame(this.ctx);
     if (moveableObject.otherDirection) {
       this.flipImageBack(moveableObject);
     }

@@ -37,13 +37,18 @@ class DrawableObject {
     });
   }
 
-  //  drawFrame(ctx) {
-  //  if (this.hitbox) {
-  //      ctx.beginPath();
-  //     ctx.lineWidth = "3";
-  //     ctx.strokeStyle = "blue";
-  //     ctx.rect(this.hitbox.x, this.hitbox.y, this.hitbox.width, this.hitbox.height);
-  //     ctx.stroke();
-  //    }
-  //  }
+  drawFrame(ctx) {
+    if (this.hitbox) {
+      ctx.beginPath();
+      ctx.lineWidth = "3";
+      ctx.strokeStyle = "blue";
+      ctx.rect(
+        this.hitbox.x,
+        this.hitbox.y,
+        this.hitbox.width,
+        this.hitbox.height
+      );
+      ctx.stroke();
+    }
+  }
 }

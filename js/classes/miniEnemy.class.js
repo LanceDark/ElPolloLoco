@@ -26,9 +26,9 @@ class miniChicken extends MoveableObject {
    */
   adjustHitbox() {
     this.hitbox = {
-      x: this.x + 0,
+      x: this.x + 20,
       y: this.y + 10,
-      width: this.width + 0,
+      width: this.width - 30,
       height: this.height - 20,
     };
   }

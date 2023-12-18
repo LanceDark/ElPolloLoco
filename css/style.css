@@ -1,0 +1,54 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('../img/polloBG.jpg');
+    min-height: 100vh;
+    margin: 0;
+    background-position: center;
+}
+
+canvas {
+    background-color: black;
+}
+
+#menu {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    border-radius: 15px;
+    background-color: chocolate;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: yellowgreen;
+}
+
+#story-container {
+    position: absolute;
+    top: 33%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    max-width: 700px
+}
+
+.story-content{
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 100px;
+}
+
+.return-button{
+    display: flex;
+}

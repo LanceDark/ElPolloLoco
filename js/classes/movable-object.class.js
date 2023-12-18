@@ -98,6 +98,11 @@ class MoveableObject extends DrawableObject {
    * Hit from Enemys to character reduce energy of Character
    */
   hit() {
+    let hitSound = new Audio("./music/hurt.mp3");
+    hitSound.addEventListener("canplaythrough", () => {
+      hitSound.play();
+    });
+    hitSound.play();
     this.energy -= 5;
     if (this.energy < 0) {
       this.energy = 0;

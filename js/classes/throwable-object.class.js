@@ -116,7 +116,7 @@ class ThrowableObject extends MoveableObject {
    * play Animation when bottle reached floor
    */
   playGroundAnimation() {
-    this.updateImageBottle(this.groundBottle[0]);
+    this.splashAnimation();
   }
 
   /**
