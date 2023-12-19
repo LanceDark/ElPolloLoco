@@ -42,11 +42,27 @@ class World {
     }, 250);
 
     setInterval(() => {
+      this.checkBottleHitEnemy();
       this.checkCollisions();
       this.checkHealth();
       this.checkCollect();
       this.checkBottleCollect();
+      this.checkEndbossPosition();
     }, 20);
+  }
+
+  checkBottleHitEnemy() {
+    this.throwableObject.forEach((bottle) => {
+      this.level.lowEnemy.forEach((enemy, index) => {
+        if (this.bottleHitEnemy(bottle, enemy)) {
+          this.handleJumpOnEnemy(bottle, enemy, index);
+        }
+      });
+    });
+  }
+
+  bottleHitEnemy(bottle, enemy) {
+    return !bottle.bottleHit && bottle.isColliding(enemy);
   }
 
   /**
@@ -57,7 +73,7 @@ class World {
       this.throwableObject.forEach((bottle) => {
         if (
           this.endboss[0].isCollidingBoss(bottle) &&
-          !bottle.bottleIsCollidingBoss
+          !bottle.bottleIsCollidingEnemy
         ) {
           this.handleCollidingBottle(bottle);
         } else if (bottle.y >= 120) {
@@ -66,10 +82,10 @@ class World {
       });
     }
   }
- /**
-  * controls the bottle which is falling on floor w/o colliding anything 
-  * @param {*} bottle 
-  */
+  /**
+   * controls the bottle which is falling on floor w/o colliding anything
+   * @param {*} bottle
+   */
   handleMissedBottle(bottle) {
     bottle.stopAnimation();
     bottle.playGroundAnimation();
@@ -206,6 +222,7 @@ class World {
    * @param {*} enemy
    */
   handleJumpOnEnemy(enemy) {
+    this.bottle.bottleHit = true;
     if (enemy instanceof miniChicken) {
       this.killMiniChicken(enemy);
     } else if (enemy instanceof LowEnemy) {
@@ -311,6 +328,16 @@ class World {
   }
 
   /**
+   * Endboss run out of Playfield
+   */
+  checkEndbossPosition() {
+    if (this.endboss[0].x <= 100) {
+      gameOverScreen();
+      this.endAnimations();
+    }
+  }
+
+  /**
    * Draw all object to Canvas
    */
   draw() {
@@ -363,7 +390,7 @@ class World {
       this.flipImage(moveableObject);
     }
     moveableObject.draw(this.ctx);
-    // moveableObject.drawFrame(this.ctx);
+    moveableObject.drawFrame(this.ctx);
     if (moveableObject.otherDirection) {
       this.flipImageBack(moveableObject);
     }

@@ -12,6 +12,7 @@ class Bottle extends ThrowableObject {
   throwBottleInterval;
   width = 70;
   height = 80;
+  bottleHit = false;
 
   constructor(x, y) {
     super();
@@ -41,6 +42,7 @@ class Bottle extends ThrowableObject {
    * @returns true or false to see if i can collect or not
    */
   isCollectedBy(character) {
+    this.adjustHitbox();
     if (!this.isCollected && character.isColliding(this)) {
       this.isCollected = true;
       return true;

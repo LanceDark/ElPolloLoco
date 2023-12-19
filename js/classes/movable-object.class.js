@@ -13,13 +13,17 @@ class MoveableObject extends DrawableObject {
    * Gravity for Objects in the Canvas
    */
   applyGravity() {
-    setInterval(() => {
-      if (this.isAboveGround() || this.speedY > 0) {
-        this.y -= this.speedY;
-        this.speedY -= this.acceleration;
-      }
-    }, 1000 / 25);
-  }
+    this.applyGravityInterval = setInterval(() => {
+        if (this.isAboveGround() || this.speedY > 0) {
+            if (!(this instanceof ThrowableObject)) {
+                this.y = Math.min(this.y - this.speedY, 150);
+            } else {
+                this.y -= this.speedY; 
+            }
+            this.speedY -= this.acceleration;
+        }
+    }, 1000 / 25)
+}
 
   /**
    *
@@ -29,7 +33,7 @@ class MoveableObject extends DrawableObject {
     if (this instanceof ThrowableObject) {
       return true;
     }
-    return this.y < 140;
+    return this.y < 150;
   }
 
   /**
@@ -58,7 +62,6 @@ class MoveableObject extends DrawableObject {
     const isAbove =
       MoveableObject.hitbox.y + MoveableObject.hitbox.height ===
       lowEnemy.hitbox.y;
-
     return isAbove;
   }
 

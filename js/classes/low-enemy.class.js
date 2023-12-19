@@ -25,6 +25,18 @@ class LowEnemy extends MoveableObject {
     this.hitbox = this.adjustHitbox();
   }
 
+  isCollidingEnemy(boss) {
+    let collision =
+      this.hitbox.x < boss.x + boss.width &&
+      this.hitbox.x + this.hitbox.width > boss.x &&
+      this.hitbox.y < boss.y + boss.height &&
+      this.hitbox.y + this.hitbox.height > boss.y;
+
+    this.bottleIsCollidingBoss = 0;
+
+    return collision;
+  }
+
   /**
    * get a various Hitbox to allow different Situations and make it more correct to hit object
    */

@@ -1,7 +1,7 @@
 class Character extends MoveableObject {
   height = 300;
   width = 150;
-  y = 80;
+  y = 140;
   x = 50;
   speed = 5;
   IMAGES_WALKING = [
@@ -140,7 +140,7 @@ class Character extends MoveableObject {
       this.jump();
     }
     this.adjustHitbox();
-    this.world.camera_x = -this.x + 75;
+    this.world.camera_x = -this.x + 70;
   }
 
   moveRight() {

@@ -31,6 +31,7 @@ class ThrowableObject extends MoveableObject {
     this.speedY = 30;
     this.bottleIsCollidingBoss = false;
     if (this.y > 200 && this.y < 350 && !this.bottleIsCollidingBoss) {
+      this.adjustHitbox();
       this.animateBottle();
     } else {
       this.playGroundAnimation();
