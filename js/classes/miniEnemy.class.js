@@ -78,7 +78,7 @@ class miniChicken extends MoveableObject {
    */
   updatePosition() {
     if (this.isDead) {
-      this.y += this.velocityY; // Bewegung der "toten" Hühner nach unten
+      this.y += this.velocityY;
     }
   }
 }

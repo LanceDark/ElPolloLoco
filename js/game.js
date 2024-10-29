@@ -1,5 +1,6 @@
 let canvas;
 let world;
+let moveLeft = false; 
 let keyboard = new Keyboard();
 let isMuted = false;
 let fullScreen = false;
@@ -230,9 +231,11 @@ function turnScreen() {
 window.addEventListener("keydown", (e) => {
   if (e.keyCode == 39) {
     keyboard.RIGHT = true;
+    moveLeft = false;
   }
   if (e.keyCode == 37) {
     keyboard.LEFT = true;
+    moveLeft = true;
   }
   if (e.keyCode == 40) {
     keyboard.DOWN = true;

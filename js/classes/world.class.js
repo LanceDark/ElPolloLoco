@@ -82,6 +82,7 @@ class World {
       });
     }
   }
+
   /**
    * controls the bottle which is falling on floor w/o colliding anything
    * @param {*} bottle
@@ -154,7 +155,8 @@ class World {
     if (
       this.keyboard.D &&
       this.character.bottle > 0 &&
-      !this.character.isAboveGround()
+      !this.character.isAboveGround() &&
+      !moveLeft
     ) {
       if (!this.throwableObject) {
         return;
@@ -390,7 +392,7 @@ class World {
       this.flipImage(moveableObject);
     }
     moveableObject.draw(this.ctx);
-    moveableObject.drawFrame(this.ctx);
+    //moveableObject.drawFrame(this.ctx);
     if (moveableObject.otherDirection) {
       this.flipImageBack(moveableObject);
     }
